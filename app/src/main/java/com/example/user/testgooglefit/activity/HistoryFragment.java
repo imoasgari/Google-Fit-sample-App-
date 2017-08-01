@@ -15,7 +15,12 @@ import android.widget.Spinner;
 import com.example.user.testgooglefit.BuildFitnessClient;
 import com.example.user.testgooglefit.R;
 import com.example.user.testgooglefit.activity.clientprovider.BuildFitnessClientProvider;
+import com.example.user.testgooglefit.models.Calories;
+import com.example.user.testgooglefit.models.Distance;
+import com.example.user.testgooglefit.models.Steps;
 import com.example.user.testgooglefit.presenter.HistoryPresenter;
+
+import java.util.List;
 
 
 /**
@@ -42,6 +47,8 @@ public class HistoryFragment extends Fragment {
 		mHistoryPresenter.onViewReady();
 
 		mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+		// create a new adapter: mAdapter = new HistoryAdapter();
+		// set the adapter for the recyclerView: mRecyclerView.setAdapter(mAdapter);
 
 //		dataSpinner = view.findViewById(R.id.data_spinner);
 //		timeSpinner = view.findViewById(R.id.time_spinner);
@@ -67,22 +74,25 @@ public class HistoryFragment extends Fragment {
 		return view;
 	}
 
-	public void displayLastMonthDistance(float lastMonthDistance) {
+	public void displayLastMonthDistance(List<Distance> lastMonthDistance) {
 	}
 
-	public void displayLastMonthCalories(float lastMonthCalories) {
+	public void displayLastMonthCalories(List<Calories> lastMonthCalories) {
+		// set the data in the adapter
 	}
 
-	public void displayLastMonthSteps(int totalStepsLastMonth) {
+	public void displayLastMonthSteps(List<Steps> totalStepsLastMonth) {
 	}
 
-	public void displayLastWeekDistance(float lastWeekDistance) {
+	public void displayLastWeekDistance(List<Distance> lastWeekDistance) {
 	}
 
-	public void displayLastWeekCalories(float lastWeekCalories) {
+	public void displayLastWeekCalories(List<Calories> lastWeekCalories) {
 	}
 
-	public void displayLastWeekSteps(int totalLastWeekSteps) {
+	public void displayLastWeekSteps(List<Steps> totalLastWeekSteps) {
 	}
+
+
 
 }

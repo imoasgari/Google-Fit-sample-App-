@@ -3,9 +3,11 @@ package com.example.user.testgooglefit;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
-import com.example.user.testgooglefit.models.DailyCalories;
-import com.example.user.testgooglefit.models.DailySteps;
+import com.example.user.testgooglefit.models.Calories;
+import com.example.user.testgooglefit.models.Distance;
+import com.example.user.testgooglefit.models.Steps;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,14 +30,12 @@ import com.google.android.gms.fitness.result.DailyTotalResult;
 import com.google.android.gms.fitness.result.DataReadResult;
 import com.google.android.gms.fitness.result.DataSourcesResult;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import logger.Log;
 
 import static android.content.ContentValues.TAG;
 
@@ -82,8 +82,7 @@ public class BuildFitnessClient {
 	}
 
 	public void initClient(final Client client) {
-		//check if the client is null || is disconectted
-
+		//check if the client is null || is disconnected
 		if (mClient == null || !mClient.isConnected()) {
 
 
@@ -91,6 +90,7 @@ public class BuildFitnessClient {
 			mClient = new GoogleApiClient.Builder(mContext)
 				.addApi(Fitness.HISTORY_API)
 				.addApi(Fitness.SENSORS_API)
+				.addApi(Fitness.RECORDING_API)
 				.addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
 				.addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
 				.addConnectionCallbacks(
@@ -100,8 +100,7 @@ public class BuildFitnessClient {
 						public void onConnected(Bundle bundle) {
 							if (client == Client.DAILY) {
 								initDailyFitnessData();
-								setWeekTime();
-								caloriesCountWeekly();
+								//subscribe();
 							} else if (client == Client.HISTORY) {
 								initHistoryFitnessData();
 							}
@@ -170,8 +169,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readData(mClient, readDistanceData).setResultCallback(new ResultCallback<DataReadResult>() {
 			@Override
 			public void onResult(@NonNull DataReadResult dataReadResult) {
-				//showTodayDistance(dataReadResult);
-				mListener.onTodayDistanceUpdated(showDistance(dataReadResult));
+				mListener.onTodayDistanceUpdated(getDailyDistance(dataReadResult));
 			}
 		});
 	}
@@ -181,8 +179,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readData(mClient, readDistanceDataWeekly).setResultCallback(new ResultCallback<DataReadResult>() {
 			@Override
 			public void onResult(@NonNull DataReadResult dataReadResult) {
-				//showLastWeekDistance(dataReadResult);
-				wListener.onLastWeekDistanceUpdated(showDistance(dataReadResult));
+				wListener.onLastWeekDistanceUpdated(getDistance(dataReadResult));
 			}
 		});
 	}
@@ -192,8 +189,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readData(mClient, readDistanceDataMonthly).setResultCallback(new ResultCallback<DataReadResult>() {
 			@Override
 			public void onResult(@NonNull DataReadResult dataReadResult) {
-				//showLastMonthDistance(dataReadResult);
-				monthlyListener.onLastMonthDistanceUpdated(showDistance(dataReadResult));
+				monthlyListener.onLastMonthDistanceUpdated(getDistance(dataReadResult));
 			}
 		});
 	}
@@ -203,8 +199,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readData(mClient, readCaloriesData).setResultCallback(new ResultCallback<DataReadResult>() {
 			@Override
 			public void onResult(@NonNull DataReadResult dataReadResult) {
-				//showCaloriesForToday(dataReadResult);
-				mListener.onTodayCalories(showCalories(dataReadResult));
+				mListener.onTodayCalories(getDailyCalories(dataReadResult));
 			}
 		});
 	}
@@ -214,9 +209,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readData(mClient, readCaloriesDataWeekly).setResultCallback(new ResultCallback<DataReadResult>() {
 			@Override
 			public void onResult(@NonNull DataReadResult dataReadResult) {
-				//showCaloriesForLastWeek(dataReadResult);
-				//wListener.onLastWeekCaloriesUpdated(showCalories(dataReadResult));
-				showCalories(dataReadResult);
+				wListener.onLastWeekCaloriesUpdated(getCalories(dataReadResult));
 			}
 		});
 	}
@@ -226,8 +219,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readData(mClient, readCaloriesDataMonthly).setResultCallback(new ResultCallback<DataReadResult>() {
 			@Override
 			public void onResult(@NonNull DataReadResult dataReadResult) {
-				//showCaloriesForLastMonth(dataReadResult);
-				monthlyListener.onLastMonthCaloriesUpdated(showCalories(dataReadResult));
+				monthlyListener.onLastMonthCaloriesUpdated(getCalories(dataReadResult));
 			}
 		});
 	}
@@ -236,7 +228,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readDailyTotal(mClient, DataType.TYPE_STEP_COUNT_DELTA).setResultCallback(new ResultCallback<DailyTotalResult>() {
 			@Override
 			public void onResult(@NonNull DailyTotalResult dailyTotalResult) {
-				showStepsForToday(dailyTotalResult);
+				getStepsForToday(dailyTotalResult);
 			}
 		});
 	}
@@ -246,8 +238,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readData(mClient, readStepsDataWeekly).setResultCallback(new ResultCallback<DataReadResult>() {
 			@Override
 			public void onResult(@NonNull DataReadResult dataReadResult) {
-				//showStepsForLastWeek(dataReadResult);
-				wListener.onLastWeekStepsUpdated(showSteps(dataReadResult));
+				wListener.onLastWeekStepsUpdated(getSteps(dataReadResult));
 			}
 		});
 	}
@@ -257,8 +248,7 @@ public class BuildFitnessClient {
 		Fitness.HistoryApi.readData(mClient, readStepDataMonthly).setResultCallback(new ResultCallback<DataReadResult>() {
 			@Override
 			public void onResult(@NonNull DataReadResult dataReadResult) {
-				//showStepsForLastMonth(dataReadResult);
-				monthlyListener.onLastMonthStepsUpdated(showSteps(dataReadResult));
+				monthlyListener.onLastMonthStepsUpdated(getSteps(dataReadResult));
 			}
 		});
 	}
@@ -306,10 +296,29 @@ public class BuildFitnessClient {
 	private DataReadRequest queryFitnessDataMonthly(DataType mDataType, DataType nDataType) {
 		return new DataReadRequest.Builder()
 			.aggregate(mDataType, nDataType)
-			.bucketByTime(1, TimeUnit.DAYS)
+			.bucketByTime(30, TimeUnit.DAYS)
 			.setTimeRange(startMonth, endMonth, TimeUnit.MILLISECONDS)
 			.build();
 	}
+
+//	public void subscribe() {
+//		Fitness.RecordingApi.subscribe(mClient,DataType.TYPE_CALORIES_EXPENDED).setResultCallback(new ResultCallback<Status>() {
+//			@Override
+//			public void onResult(@NonNull Status status) {
+//				if(status.isSuccess()) {
+//					if(status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+//						Log.i("TAG", "Existing subscription for activity detected!");
+//					}
+//					else {
+//						Log.i("TAG", "Successfully subscribed!");
+//					}
+//				} else {
+//					Log.i("TAG", "There was a problem!");
+//				}
+//			}
+//		});
+//
+//	}
 
 	private void setDayTime() {
 		Calendar cal = Calendar.getInstance();
@@ -327,7 +336,7 @@ public class BuildFitnessClient {
 		Date now = new Date();
 		calendar.setTime(now);
 		endWeek = calendar.getTimeInMillis();
-		calendar.add(Calendar.WEEK_OF_YEAR, -2);
+		calendar.add(Calendar.WEEK_OF_YEAR, -1);
 		startWeek = calendar.getTimeInMillis();
 	}
 
@@ -340,72 +349,36 @@ public class BuildFitnessClient {
 		startMonth = calendar.getTimeInMillis();
 	}
 
-//	private void showCaloriesForToday(DataReadResult dataReadResult) {
-//		Bucket bucket = dataReadResult.getBuckets().get(0);
-//		List<DataSet> dataSets = bucket.getDataSets();
-//		for (DataSet dataSet : dataSets) {
-//			for (DataPoint dp : dataSet.getDataPoints()) {
-//				for (Field field : dp.getDataType().getFields()) {
-//					float totalCalories = dp.getValue(field).asFloat();
-//					mListener.onTodayCalories((int) totalCalories);
-//				}
-//			}
-//		}
-//
-//	}
-//
-//	private void showCaloriesForLastWeek(DataReadResult dataReadResult) {
-//		Bucket bucket = dataReadResult.getBuckets().get(0);
-//		List<DataSet> dataSets = bucket.getDataSets();
-//		for (DataSet dataSet : dataSets) {
-//			for (DataPoint dp : dataSet.getDataPoints()) {
-//				for (Field field : dp.getDataType().getFields()) {
-//					float lastWeekCalories = dp.getValue(field).asFloat();
-//					wListener.onLastWeekCaloriesUpdated((int) lastWeekCalories);
-//				}
-//			}
-//		}
-//
-//	}
-//
-//	private void showCaloriesForLastMonth(DataReadResult dataReadResult) {
-//		Bucket bucket = dataReadResult.getBuckets().get(0);
-//		List<DataSet> dataSets = bucket.getDataSets();
-//		for (DataSet dataSet : dataSets) {
-//			for (DataPoint dp : dataSet.getDataPoints()) {
-//				for (Field field : dp.getDataType().getFields()) {
-//					float lastMonthCalories = dp.getValue(field).asFloat();
-//					monthlyListener.onLastMonthCaloriesUpdated((int) lastMonthCalories);
-//				}
-//			}
-//		}
-//	}
+	private List<Calories> getCalories(DataReadResult dataReadResult) {
+		float calories;
+		List<Calories> caloriesList = new ArrayList<>();
 
-	private float showCalories(DataReadResult dataReadResult) {
-		List<DailyCalories> mCaloriesList = new ArrayList<>();
-		float calories = 0;
-		DateFormat dateFormat = DateFormat.getDateInstance();
-		Log.i(TAG, "Range Start: " + dateFormat.format(startWeek));
-		Log.i(TAG, "Range End: " + dateFormat.format(endWeek));
-
-		Bucket bucket = dataReadResult.getBuckets().get(0);
-		List<DataSet> dataSets = bucket.getDataSets();
-		for (DataSet dataSet : dataSets) {
-			for (DataPoint dataPoint : dataSet.getDataPoints()) {
-				Log.i("TAG","Type : " + dataPoint.getDataType().getName());
-				Log.i("TAG", "StartTime : " + dateFormat.format(dataPoint.getStartTime(TimeUnit.MILLISECONDS)));
-				Log.i("TAG", "EndTime : " + dateFormat.format(dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
-				for (Field field : dataPoint.getDataType().getFields()) {
-					calories = dataPoint.getValue(field).asFloat();
-					Log.i("TAG" , "Field : " + field.getName() + "Value : " + dataPoint.getValue(field));
-					//mCaloriesList.add(calories, dataPoint.getStartTime(TimeUnit.MILLISECONDS));
+		for (Bucket bucket : dataReadResult.getBuckets()) {
+			List<DataSet> dataSets = bucket.getDataSets();
+			for (DataSet dataSet : dataSets) {
+				for (DataPoint dataPoint : dataSet.getDataPoints()) {
+					for (Field field : dataPoint.getDataType().getFields()) {
+						calories = dataPoint.getValue(field).asFloat();
+						caloriesList.add(new Calories((int)calories, dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+					}
 				}
 			}
 		}
-		return (int) calories;
+//
+//		Fitness.RecordingApi.listSubscriptions(mClient,DataType.TYPE_CALORIES_EXPENDED).setResultCallback(new ResultCallback<ListSubscriptionsResult>() {
+//			@Override
+//			public void onResult(@NonNull ListSubscriptionsResult listSubscriptionsResult) {
+//				for (Subscription subscription : listSubscriptionsResult.getSubscriptions()) {
+//					DataType dataType = subscription.getDataType();
+//					System.out.println("Hello" + dataType.getName());
+//
+//				}
+//			}
+//		});
+		return caloriesList;
 	}
 
-	private void showStepsForToday(DailyTotalResult dailyTotalResult) {
+	private void getStepsForToday(DailyTotalResult dailyTotalResult) {
 		int total;
 		if (dailyTotalResult.getStatus().isSuccess()) {
 			DataSet dataSet = dailyTotalResult.getTotal();
@@ -422,94 +395,49 @@ public class BuildFitnessClient {
 		}
 	}
 
-//
-//	private void showStepsForLastWeek(DataReadResult dataReadResult) {
-//		//List<DailySteps> mDailyStepsList = new ArrayList<>();
-//
-//		Bucket bucket = dataReadResult.getBuckets().get(0);
-//		List<DataSet> dataSets = bucket.getDataSets();
-//		for (DataSet ds : dataSets) {
-//			for (DataPoint dp : ds.getDataPoints()) {
-//				for (Field field : dp.getDataType().getFields()) {
-//					int totalLastWeekSteps = dp.getValue(field).asInt();
-//					//mDailyStepsList.add(new DailySteps(steps,))
-//					wListener.onLastWeekStepsUpdated(totalLastWeekSteps);
-//				}
-//			}
-//		}
-//	}
-//
-//	private void showStepsForLastMonth(DataReadResult dataReadResult) {
-//		Bucket bucket = dataReadResult.getBuckets().get(0);
-//		List<DataSet> dataSets = bucket.getDataSets();
-//		for (DataSet ds : dataSets) {
-//			for (DataPoint dp : ds.getDataPoints()) {
-//				for (Field field : dp.getDataType().getFields()) {
-//					int totalStepsLastMonth = dp.getValue(field).asInt();
-//					monthlyListener.onLastMonthStepsUpdated(totalStepsLastMonth);
-//				}
-//			}
-//		}
-//	}
 
-	private int showSteps(DataReadResult dataReadResult) {
-		int steps = 0;
-		Bucket bucket = dataReadResult.getBuckets().get(0);
-		List<DataSet> dataSets = bucket.getDataSets();
-		for (DataSet dataSet : dataSets) {
-			for (DataPoint dataPoint : dataSet.getDataPoints()) {
-				for (Field field : dataPoint.getDataType().getFields()) {
-					steps = dataPoint.getValue(field).asInt();
+	private List<Steps> getSteps(DataReadResult dataReadResult) {
+		int steps;
+		List<Steps> stepsList = new ArrayList<>();
+
+		for (Bucket bucket : dataReadResult.getBuckets()) {
+			List<DataSet> dataSets = bucket.getDataSets();
+			for (DataSet dataSet : dataSets) {
+				for (DataPoint dataPoint : dataSet.getDataPoints()) {
+					for (Field field : dataPoint.getDataType().getFields()) {
+						steps = dataPoint.getValue(field).asInt();
+						stepsList.add(new Steps(steps, dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+
+					}
 				}
 			}
 		}
-		return steps;
+		return stepsList;
 	}
 
-//	private void showTodayDistance(DataReadResult dataReadResult) {
-//		Bucket bucket = dataReadResult.getBuckets().get(0);
-//		List<DataSet> dataSets = bucket.getDataSets();
-//		for (DataSet dataSet : dataSets) {
-//			for (DataPoint dp : dataSet.getDataPoints()) {
-//				for (Field field : dp.getDataType().getFields()) {
-//					float totalDistance = dp.getValue(field).asFloat();
-//					totalDistance = totalDistance / 1000;
-//					mListener.onTodayDistanceUpdated(totalDistance);
-//				}
-//			}
-//		}
-//	}
-//
-//	private void showLastWeekDistance(DataReadResult dataReadResult) {
-//		Bucket bucket = dataReadResult.getBuckets().get(0);
-//		List<DataSet> dataSets = bucket.getDataSets();
-//		for (DataSet dataSet : dataSets) {
-//			for (DataPoint dp : dataSet.getDataPoints()) {
-//				for (Field field : dp.getDataType().getFields()) {
-//					float lastWeekDistance = dp.getValue(field).asFloat();
-//					lastWeekDistance /= 1000;
-//					wListener.onLastWeekDistanceUpdated(lastWeekDistance);
-//				}
-//			}
-//		}
-//	}
-//
-//	private void showLastMonthDistance(DataReadResult dataReadResult) {
-//		Bucket bucket = dataReadResult.getBuckets().get(0);
-//		List<DataSet> dataSets = bucket.getDataSets();
-//		for (DataSet dataSet : dataSets) {
-//			for (DataPoint dp : dataSet.getDataPoints()) {
-//				for (Field field : dp.getDataType().getFields()) {
-//					float lastMonthDistance = dp.getValue(field).asFloat();
-//					lastMonthDistance /= 1000;
-//					monthlyListener.onLastMonthDistanceUpdated(lastMonthDistance);
-//				}
-//			}
-//		}
-//	}
+	private List<Distance> getDistance(DataReadResult dataReadResult) {
+		float distance;
+		List<Distance> distanceList = new ArrayList<>();
 
-	private float showDistance(DataReadResult dataReadResult) {
+		for (Bucket bucket : dataReadResult.getBuckets()) {
+			List<DataSet> dataSets = bucket.getDataSets();
+			for (DataSet dataSet : dataSets) {
+				for (DataPoint dataPoint : dataSet.getDataPoints()) {
+					for (Field field : dataPoint.getDataType().getFields()) {
+						distance = dataPoint.getValue(field).asFloat();
+						distance /= 1000;
+						distanceList.add(new Distance(distance, dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+					}
+				}
+			}
+		}
+		return distanceList;
+	}
+
+
+	private float getDailyDistance(DataReadResult dataReadResult) {
 		float distance = 0;
+
 		Bucket bucket = dataReadResult.getBuckets().get(0);
 		List<DataSet> dataSets = bucket.getDataSets();
 		for (DataSet dataSet : dataSets) {
@@ -521,6 +449,21 @@ public class BuildFitnessClient {
 			}
 		}
 		return distance;
+	}
+
+	private float getDailyCalories(DataReadResult dataReadResult) {
+		float calories = 0;
+
+		Bucket bucket = dataReadResult.getBuckets().get(0);
+		List<DataSet> dataSets = bucket.getDataSets();
+		for (DataSet dataSet : dataSets) {
+			for (DataPoint dataPoint : dataSet.getDataPoints()) {
+				for (Field field : dataPoint.getDataType().getFields()) {
+					calories = dataPoint.getValue(field).asFloat();
+				}
+			}
+		}
+		return (int) calories;
 	}
 
 

@@ -18,10 +18,13 @@ import com.example.user.testgooglefit.PermissionManager;
 import com.example.user.testgooglefit.R;
 import com.example.user.testgooglefit.ShowSensorData;
 import com.example.user.testgooglefit.activity.clientprovider.BuildFitnessClientProvider;
+import com.example.user.testgooglefit.models.Distance;
 import com.example.user.testgooglefit.presenter.DashboardPresenter;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
+
+import java.util.List;
 
 import static com.example.user.testgooglefit.PermissionManager.MY_PERMISSION_FINE_LOCATION;
 
