@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_settings_black_24dp.png",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/drawable-hdpi/ic_settings_black_24dp.png"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_history_black_24dp.png",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/drawable-hdpi/ic_history_black_24dp.png"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_graphic_eq_black_24dp.png",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/drawable-hdpi/ic_graphic_eq_black_24dp.png"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi/illu_workangel_bag.png",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/drawable-hdpi/illu_workangel_bag.png"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi/img_logo_login.png",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/drawable-hdpi/img_logo_login.png"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_dashboard_black_24dp.png",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/drawable-hdpi/ic_dashboard_black_24dp.png"
+    }
+]

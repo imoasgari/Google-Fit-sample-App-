@@ -1,0 +1,129 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:2:1-30:12
+	package
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:3:11-51
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:6:5-78
+	android:name
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:6:22-76
+application
+ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:10:5-28:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/user/.android/build-cache/9826ba6510c4222c262d3ae1ca40c87311e819d7/output/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-fitness:9.8.0] /Users/user/.android/build-cache/8d73c2b0b8769ae50b8becd2400181f8b21e38da/output/AndroidManifest.xml:18:5-19
+MERGED from [com.google.android.gms:play-services-location:9.8.0] /Users/user/.android/build-cache/bb61f8065002b39fee8ca65283673aba68e7ff24/output/AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-base:9.8.0] /Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-tasks:9.8.0] /Users/user/.android/build-cache/0df3d9b2d3bf09e79d0550214e720a410ec9fef1/output/AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-basement:9.8.0] /Users/user/.android/build-cache/4ea00128d985b7bd2c2b79885d37c6c6031be93d/output/AndroidManifest.xml:19:5-21:19
+MERGED from [com.android.support:design:26.0.0-alpha1] /Users/user/.android/build-cache/b65e9da38274e66b96f0fb5f33441573b937b121/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:transition:26.0.0-alpha1] /Users/user/.android/build-cache/17bb6e65c897c20c74a134a508116eeac6247a68/output/AndroidManifest.xml:26:5-20
+MERGED from [com.github.bmarrdev:android-DecoView-charting:v0.9.3] /Users/user/.android/build-cache/3dd2a8a17bf875ba62d9ba9e5809a5542d319923/output/AndroidManifest.xml:11:5-14:19
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/user/.android/build-cache/19084a3a21cd0ce5111641c76705c6f897a3db2d/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/user/.android/build-cache/1ca969b2713718486b560e950005db6da23c7059/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/user/.android/build-cache/ca0d64cf48dac9b9e42a75884087bafb4bfd2652/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/user/.android/build-cache/69f67505166bdb1b26bb64e4d34052cdf11abe62/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/user/.android/build-cache/c50cfff74c0783cd2e9d5e3c6fc6d5ff79e19364/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/user/.android/build-cache/cbb5e21ca6d87254cf0ef9220f1f85a2f073658c/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/user/.android/build-cache/d6f6355ed887b5b9caba329aee378e993a5e618b/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/user/.android/build-cache/ae8105ae13128c2be49ea89dd76d739e94eca7c7/output/AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:13:9-41
+	android:supportsRtl
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:15:9-35
+	android:roundIcon
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:14:9-54
+	android:allowBackup
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:11:9-35
+	android:icon
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:12:9-43
+	android:theme
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:16:9-40
+activity#com.example.user.testgooglefit.activity.LandingActivity
+ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:17:9-23:20
+	android:name
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:17:19-59
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:18:13-22:29
+action#android.intent.action.MAIN
+ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:19:17-68
+	android:name
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:19:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:21:17-76
+	android:name
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:21:27-74
+activity#com.example.user.testgooglefit.activity.NavigationActivity
+ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:25:9-26:20
+	android:name
+		ADDED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml:25:19-62
+uses-sdk
+INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/user/.android/build-cache/9826ba6510c4222c262d3ae1ca40c87311e819d7/output/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-fitness:9.8.0] /Users/user/.android/build-cache/8d73c2b0b8769ae50b8becd2400181f8b21e38da/output/AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-location:9.8.0] /Users/user/.android/build-cache/bb61f8065002b39fee8ca65283673aba68e7ff24/output/AndroidManifest.xml:3:5-42
+MERGED from [com.google.android.gms:play-services-base:9.8.0] /Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-tasks:9.8.0] /Users/user/.android/build-cache/0df3d9b2d3bf09e79d0550214e720a410ec9fef1/output/AndroidManifest.xml:3:5-42
+MERGED from [com.google.android.gms:play-services-basement:9.8.0] /Users/user/.android/build-cache/4ea00128d985b7bd2c2b79885d37c6c6031be93d/output/AndroidManifest.xml:17:5-42
+MERGED from [com.android.support:design:26.0.0-alpha1] /Users/user/.android/build-cache/b65e9da38274e66b96f0fb5f33441573b937b121/output/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:recyclerview-v7:26.0.0-alpha1] /Users/user/.android/build-cache/2fd52ab13857e10ad55df9cd0d69aa145673d69d/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.0.0-alpha1] /Users/user/.android/build-cache/17bb6e65c897c20c74a134a508116eeac6247a68/output/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bmarrdev:android-DecoView-charting:v0.9.3] /Users/user/.android/build-cache/3dd2a8a17bf875ba62d9ba9e5809a5542d319923/output/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/user/.android/build-cache/19084a3a21cd0ce5111641c76705c6f897a3db2d/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/user/.android/build-cache/1ca969b2713718486b560e950005db6da23c7059/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/user/.android/build-cache/ca0d64cf48dac9b9e42a75884087bafb4bfd2652/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/user/.android/build-cache/69f67505166bdb1b26bb64e4d34052cdf11abe62/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/user/.android/build-cache/c50cfff74c0783cd2e9d5e3c6fc6d5ff79e19364/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/user/.android/build-cache/cbb5e21ca6d87254cf0ef9220f1f85a2f073658c/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/user/.android/build-cache/d6f6355ed887b5b9caba329aee378e993a5e618b/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/user/.android/build-cache/ae8105ae13128c2be49ea89dd76d739e94eca7c7/output/AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:26.0.0-alpha1] /Users/user/.android/build-cache/b65e9da38274e66b96f0fb5f33441573b937b121/output/AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/user/TestGoogleFit/app/src/main/AndroidManifest.xml
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:9.8.0] /Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] /Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] /Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] /Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/AndroidManifest.xml:19:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/user/.android/build-cache/4ea00128d985b7bd2c2b79885d37c6c6031be93d/output/AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/user/.android/build-cache/4ea00128d985b7bd2c2b79885d37c6c6031be93d/output/AndroidManifest.xml:20:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/user/.android/build-cache/4ea00128d985b7bd2c2b79885d37c6c6031be93d/output/AndroidManifest.xml:20:20-65
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:26.0.0-alpha1] /Users/user/.android/build-cache/b65e9da38274e66b96f0fb5f33441573b937b121/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:recyclerview-v7:26.0.0-alpha1] /Users/user/.android/build-cache/2fd52ab13857e10ad55df9cd0d69aa145673d69d/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:transition:26.0.0-alpha1] /Users/user/.android/build-cache/17bb6e65c897c20c74a134a508116eeac6247a68/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/user/.android/build-cache/19084a3a21cd0ce5111641c76705c6f897a3db2d/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/user/.android/build-cache/1ca969b2713718486b560e950005db6da23c7059/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/user/.android/build-cache/ca0d64cf48dac9b9e42a75884087bafb4bfd2652/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/user/.android/build-cache/69f67505166bdb1b26bb64e4d34052cdf11abe62/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/user/.android/build-cache/c50cfff74c0783cd2e9d5e3c6fc6d5ff79e19364/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/user/.android/build-cache/cbb5e21ca6d87254cf0ef9220f1f85a2f073658c/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/user/.android/build-cache/d6f6355ed887b5b9caba329aee378e993a5e618b/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/user/.android/build-cache/ae8105ae13128c2be49ea89dd76d739e94eca7c7/output/AndroidManifest.xml:25:5-27:41
+	android:value
+		ADDED from [com.android.support:design:26.0.0-alpha1] /Users/user/.android/build-cache/b65e9da38274e66b96f0fb5f33441573b937b121/output/AndroidManifest.xml:27:9-38
+	android:name
+		ADDED from [com.android.support:design:26.0.0-alpha1] /Users/user/.android/build-cache/b65e9da38274e66b96f0fb5f33441573b937b121/output/AndroidManifest.xml:26:9-47

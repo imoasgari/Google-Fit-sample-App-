@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/large"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textRemaining"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:maxWidth="100dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/main_activity_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textSteps"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:text="@string/text_steps"/>
+        </LinearLayout>
+
+        <com.hookedonplay.decoviewlib.DecoView
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
+            custom:dv_lineWidth="10dp"
+            android:id="@+id/dynamicArcView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/large"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:padding="24dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/textCalories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"
+                    android:text="@string/text_calories"/>
+            </LinearLayout>
+
+            <com.hookedonplay.decoviewlib.DecoView
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                custom:dv_lineWidth="10dp"
+                android:id="@+id/dynamicArcViewCalories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:padding="24dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"
+                    android:text="@string/text_distance"/>
+
+            </LinearLayout>
+
+            <com.hookedonplay.decoviewlib.DecoView
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                custom:dv_lineWidth="10dp"
+                android:id="@+id/dynamicArcViewDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

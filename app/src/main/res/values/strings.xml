@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Dashboard</string>
+    <string name="permission_access_text">This app will require to access your location.</string>
+    <string name="permission_access_title">Location Required!</string>
+    <string name="permission_access_allow">OK</string>
+    <string name="landing_page_sponsers_text">Powered BY</string>
+    <string name="landing_page_slogan">Healthier life will result in happier life</string>
+    <string name="landing_page_logo">FITLIFE</string>
+    <string name="landing_page_allow_location">Enable  Locations</string>
+    <string name="text_dashboard_bottom_navigation">Dashboard</string>
+    <string name="text_history_bottom_navigation">History</string>
+    <string name="text_stats_bottom_navigation">Analytics</string>
+    <string name="text_toolbar_dashboard">Dashboard</string>
+    <string name="text_toolbar_history">History</string>
+    <string name="text_toolbar_stats">Analytics</string>
+    <string name="text_toolbar_setting">Settings</string>
+    <string name="text_setting_bottom_navigation">Setting</string>
+    <string name="location_denied">\"Location permission is required!\"</string>
+    <string name="text_calories">Cal</string>
+    <string name="text_distance">Km</string>
+    <string name="text_steps">steps</string>
+    <string-array name="time_view_array">
+        <item>Day View</item>
+        <item>Week View</item>
+        <item>Month View</item>
+    </string-array>
+    <string-array name="data_view_array">
+        <item>Calories</item>
+        <item>Distance</item>
+        <item>Steps</item>
+    </string-array>
+</resources>

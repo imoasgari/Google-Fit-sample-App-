@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/color-v11/abc_background_cache_hint_selector_material_dark.xml"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/color-v11/abc_background_cache_hint_selector_material_light.xml"
+    }
+]

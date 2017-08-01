@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small">24dp</dimen>
+    <dimen name="medium">48dp</dimen>
+    <dimen name="large">56dp</dimen>
+    <dimen name="xsmall">16dp</dimen>
+    <dimen name="button">14sp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+
+</resources>

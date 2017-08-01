@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:id="@+id/landing_activity"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/landing_page_logo"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/small"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/illu_workangel_bag"
+            android:id="@+id/image"
+            android:layout_marginTop="@dimen/small"
+            android:layout_marginBottom="@dimen/small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/landing_page_slogan"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_marginTop="@dimen/small"
+            android:layout_marginBottom="@dimen/medium"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/landing_page_sponsers_text"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/small"
+            android:gravity="center"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_logo_login"
+            android:id="@+id/imageView"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/Widget.New.Button"
+            android:id="@+id/landing_activity_location_button"
+            android:text="@string/landing_page_allow_location"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/large"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:textAllCaps="true"/>
+    </LinearLayout>
+
+
+
+</FrameLayout>
