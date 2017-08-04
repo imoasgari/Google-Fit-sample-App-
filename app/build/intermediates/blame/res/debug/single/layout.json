@@ -44,6 +44,10 @@
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/spinner_dropdown_item.xml",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/layout/spinner_dropdown_item.xml"
+    },
+    {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/layout/abc_action_mode_bar.xml"
     },
@@ -54,6 +58,10 @@
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/design_layout_tab_text.xml",
         "source": "/Users/user/.android/build-cache/b65e9da38274e66b96f0fb5f33441573b937b121/output/res/layout/design_layout_tab_text.xml"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/spinner_layout.xml",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/layout/spinner_layout.xml"
     },
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/design_bottom_navigation_item.xml",
@@ -214,5 +222,9 @@
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/items_history.xml",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/layout/items_history.xml"
     }
 ]

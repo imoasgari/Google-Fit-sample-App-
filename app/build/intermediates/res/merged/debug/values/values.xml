@@ -675,6 +675,7 @@
     <dimen name="notification_top_pad_large_text">5dp</dimen>
     <dimen name="small">24dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="xSmall">18dp</dimen>
     <dimen name="xsmall">16dp</dimen>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <drawable name="notification_template_icon_low_bg">#0cffffff</drawable>
@@ -735,7 +736,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <string name="app_name">Dashboard</string>
+    <string name="app_name">FitLife</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>

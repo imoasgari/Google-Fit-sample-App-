@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dashboard</string>
+    <string name="app_name">FitLife</string>
     <string name="permission_access_text">This app will require to access your location.</string>
     <string name="permission_access_title">Location Required!</string>
     <string name="permission_access_allow">OK</string>
