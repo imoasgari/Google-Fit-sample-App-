@@ -39,7 +39,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		HistoryListItem historyListItem = mHistoryListItem.get(position);
 		holder.mStats.setText(historyListItem.getValue().toString());
-		holder.mDate.setText(Utils.getDate(historyListItem.getEndDate(), DATE_FORMAT));
+		holder.mDate.setText(Utils.getMonthDate(historyListItem.getEndDate(), DATE_FORMAT));
 
 	}
 
@@ -72,7 +72,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
 	public static class Utils {
 
-		public static String getDate(long milliSeconds, String dateFormat) {
+		public static String getMonthDate(long milliSeconds, String dateFormat) {
 			// Create a DateFormatter object for displaying date in specified format.
 			SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 
@@ -81,5 +81,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 			calendar.setTimeInMillis(milliSeconds);
 			return formatter.format(calendar.getTime());
 		}
+
 	}
 }

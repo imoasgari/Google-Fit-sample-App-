@@ -5,7 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.example.user.FitLife.activity.datarequester.CaloriesDataRequester;
+import com.example.user.FitLife.activity.datarequester.DataRequester;
+import com.example.user.FitLife.activity.datarequester.DistastanceDataRequester;
+import com.example.user.FitLife.activity.datarequester.StepsDataRequester;
 import com.example.user.FitLife.models.HistoryListItem;
+import com.example.user.FitLife.presenter.HistoryListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -31,7 +36,9 @@ import com.google.android.gms.fitness.result.DataSourcesResult;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static android.content.ContentValues.TAG;
@@ -42,12 +49,13 @@ import static android.content.ContentValues.TAG;
 
 public class BuildFitnessClient {
 
+	private Map<Integer, DataRequester> mDataRequesterMap = new HashMap<>();
+
 	private GoogleApiClient mClient;
 	private FragmentActivity mContext;
 	private ShowFitnessDataInterface mListener;
 	private OnDataPointListener dListener;
-	private ShowFitnessWeeklyDataInterface wListener;
-	private ShowFitnessMonthlyInterface monthlyListener;
+	private HistoryListener mHistoryListener;
 	private long startTime;
 	private long endTime;
 	private int mHistorySteps;
@@ -59,18 +67,46 @@ public class BuildFitnessClient {
 
 	public BuildFitnessClient(FragmentActivity context) {
 		mContext = context;
+		mDataRequesterMap.put(0, new CaloriesDataRequester().setClient(this));
+		mDataRequesterMap.put(1, new DistastanceDataRequester().setClient(this));
+		mDataRequesterMap.put(2, new StepsDataRequester().setClient(this));
+
 	}
 
 	public void setListener(ShowFitnessDataInterface listener) {
 		mListener = listener;
 	}
 
-	public void setMonthlyListener(ShowFitnessMonthlyInterface listener) {
-		monthlyListener = listener;
+	public void setHistoryListener(HistoryListener listener) {
+		mHistoryListener = listener;
 	}
 
-	public void setWeeklyListener(ShowFitnessWeeklyDataInterface listener) {
-		wListener = listener;
+	public HistoryListener getHistoryListener() {
+		return mHistoryListener;
+	}
+
+	public long getEndWeek() {
+		return endWeek;
+	}
+
+	public long getStartWeek() {
+		return startWeek;
+	}
+
+	public long getEndMonth() {
+		return endMonth;
+	}
+
+	public long getStartMonth() {
+		return startMonth;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public long getEndTime() {
+		return endTime;
 	}
 
 	public void initClient() {
@@ -124,13 +160,13 @@ public class BuildFitnessClient {
 	}
 
 	private void initDailyFitnessData() {
-		stepCount();
-		caloriesCount();
-		distanceCount();
+		//stepCount();
+		//caloriesCount();
+		//distanceCount();
 		sensorStepCount();
 	}
 
-	private void sensorStepCount() {
+	public void sensorStepCount() {
 		Fitness.SensorsApi.findDataSources(mClient, new DataSourcesRequest.Builder()
 			.setDataTypes(DataType.TYPE_STEP_COUNT_DELTA)
 			.setDataSourceTypes(DataSource.TYPE_DERIVED)
@@ -146,108 +182,25 @@ public class BuildFitnessClient {
 			});
 	}
 
-	private void distanceCount() {
-		DataReadRequest readDistanceData = queryFitnessData(DataType.TYPE_DISTANCE_DELTA, DataType.AGGREGATE_DISTANCE_DELTA);
-		Fitness.HistoryApi.readData(mClient, readDistanceData).setResultCallback(new ResultCallback<DataReadResult>() {
-			@Override
-			public void onResult(@NonNull DataReadResult dataReadResult) {
-				mListener.onTodayDistanceUpdated(getDailyDistance(dataReadResult));
-			}
-		});
+//	public void stepCount() {
+//		Fitness.HistoryApi.readDailyTotal(mClient, DataType.TYPE_STEP_COUNT_DELTA).setResultCallback(new ResultCallback<DailyTotalResult>() {
+//			@Override
+//			public void onResult(@NonNull DailyTotalResult dailyTotalResult) {
+//				getStepsForToday(dailyTotalResult);
+//			}
+//		});
+//	}
+
+	public void requestDataForSteps(DataType dataType, ResultCallback<DailyTotalResult> callback) {
+		Fitness.HistoryApi.readDailyTotal(mClient, dataType).setResultCallback(callback);
 	}
 
-	private void distanceCountWeekly() {
-		DataReadRequest readDistanceDataWeekly = queryFitnessDataWeekly(DataType.TYPE_DISTANCE_DELTA, DataType.AGGREGATE_DISTANCE_DELTA);
-		Fitness.HistoryApi.readData(mClient, readDistanceDataWeekly).setResultCallback(new ResultCallback<DataReadResult>() {
-			@Override
-			public void onResult(@NonNull DataReadResult dataReadResult) {
-				if (wListener != null) {
-					wListener.onLastWeekDistanceUpdated(getDistance(dataReadResult));
-				}
-
-			}
-		});
+	public void requestDataFor(int type, int range) {
+		mDataRequesterMap.get(type).requestDataFor(range);
 	}
 
-	private void distanceCountMonthly() {
-		DataReadRequest readDistanceDataMonthly = queryFitnessDataMonthly(DataType.TYPE_DISTANCE_DELTA, DataType.AGGREGATE_DISTANCE_DELTA);
-		Fitness.HistoryApi.readData(mClient, readDistanceDataMonthly).setResultCallback(new ResultCallback<DataReadResult>() {
-			@Override
-			public void onResult(@NonNull DataReadResult dataReadResult) {
-				if (monthlyListener != null) {
-					monthlyListener.onLastMonthDistanceUpdated(getDistance(dataReadResult));
-				}
-			}
-		});
-	}
-
-	private void caloriesCount() {
-		DataReadRequest readCaloriesData = queryFitnessData(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED);
-		Fitness.HistoryApi.readData(mClient, readCaloriesData).setResultCallback(new ResultCallback<DataReadResult>() {
-			@Override
-			public void onResult(@NonNull DataReadResult dataReadResult) {
-				if (mListener != null) {
-					mListener.onTodayCalories(getDailyCalories(dataReadResult));
-				}
-			}
-		});
-	}
-
-	private void caloriesCountWeekly() {
-		DataReadRequest readCaloriesDataWeekly = queryFitnessDataWeekly(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED);
-		Fitness.HistoryApi.readData(mClient, readCaloriesDataWeekly).setResultCallback(new ResultCallback<DataReadResult>() {
-			@Override
-			public void onResult(@NonNull DataReadResult dataReadResult) {
-				if (wListener != null) {
-					wListener.onLastWeekCaloriesUpdated(getCalories(dataReadResult));
-				}
-			}
-		});
-	}
-
-	private void caloriesCountMonthly() {
-		DataReadRequest readCaloriesDataMonthly = queryFitnessDataMonthly(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED);
-		Fitness.HistoryApi.readData(mClient, readCaloriesDataMonthly).setResultCallback(new ResultCallback<DataReadResult>() {
-			@Override
-			public void onResult(@NonNull DataReadResult dataReadResult) {
-				if (monthlyListener != null) {
-					monthlyListener.onLastMonthCaloriesUpdated(getCalories(dataReadResult));
-				}
-			}
-		});
-	}
-
-	private void stepCount() {
-		Fitness.HistoryApi.readDailyTotal(mClient, DataType.TYPE_STEP_COUNT_DELTA).setResultCallback(new ResultCallback<DailyTotalResult>() {
-			@Override
-			public void onResult(@NonNull DailyTotalResult dailyTotalResult) {
-				getStepsForToday(dailyTotalResult);
-			}
-		});
-	}
-
-	private void stepCountWeekly() {
-		DataReadRequest readStepsDataWeekly = queryFitnessDataWeekly(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA);
-		Fitness.HistoryApi.readData(mClient, readStepsDataWeekly).setResultCallback(new ResultCallback<DataReadResult>() {
-			@Override
-			public void onResult(@NonNull DataReadResult dataReadResult) {
-				if (wListener != null) {
-					wListener.onLastWeekStepsUpdated(getSteps(dataReadResult));
-				}
-			}
-		});
-	}
-
-	private void stepCountMonthly() {
-		DataReadRequest readStepDataMonthly = queryFitnessDataMonthly(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA);
-		Fitness.HistoryApi.readData(mClient, readStepDataMonthly).setResultCallback(new ResultCallback<DataReadResult>() {
-			@Override
-			public void onResult(@NonNull DataReadResult dataReadResult) {
-				if (monthlyListener != null) {
-					monthlyListener.onLastMonthStepsUpdated(getSteps(dataReadResult));
-				}
-			}
-		});
+	public void requestHistoryData(DataReadRequest readRequest, ResultCallback<DataReadResult> callback) {
+		Fitness.HistoryApi.readData(mClient, readRequest).setResultCallback(callback);
 	}
 
 	private void registerFitnessDataListener(DataSource dataSource, DataType dataType) {
@@ -274,27 +227,11 @@ public class BuildFitnessClient {
 			});
 	}
 
-	private DataReadRequest queryFitnessData(DataType dataTypeS, DataType dataTypeA) {
+	public DataReadRequest buildQueryForFitnessData(DataType activityType, DataType populateDataType, int time, long startPeriod, long endPeriod) {
 		return new DataReadRequest.Builder()
-			.aggregate(dataTypeS, dataTypeA)
-			.bucketByTime(1, TimeUnit.DAYS)
-			.setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-			.build();
-	}
-
-	private DataReadRequest queryFitnessDataWeekly(DataType mDataType, DataType nDataType) {
-		return new DataReadRequest.Builder()
-			.aggregate(mDataType, nDataType)
-			.bucketByTime(7, TimeUnit.DAYS)
-			.setTimeRange(startWeek, endWeek, TimeUnit.MILLISECONDS)
-			.build();
-	}
-
-	private DataReadRequest queryFitnessDataMonthly(DataType mDataType, DataType nDataType) {
-		return new DataReadRequest.Builder()
-			.aggregate(mDataType, nDataType)
-			.bucketByTime(30, TimeUnit.DAYS)
-			.setTimeRange(startMonth, endMonth, TimeUnit.MILLISECONDS)
+			.aggregate(activityType, populateDataType)
+			.bucketByTime(time, TimeUnit.DAYS)
+			.setTimeRange(startPeriod, endPeriod, TimeUnit.MILLISECONDS)
 			.build();
 	}
 
@@ -327,7 +264,7 @@ public class BuildFitnessClient {
 		startMonth = calendar.getTimeInMillis();
 	}
 
-	private List<HistoryListItem> getCalories(DataReadResult dataReadResult) {
+	public List<HistoryListItem> getCalories(DataReadResult dataReadResult) {
 		float calories;
 		List<HistoryListItem> caloriesList = new ArrayList<>();
 
@@ -345,7 +282,7 @@ public class BuildFitnessClient {
 		return caloriesList;
 	}
 
-	private void getStepsForToday(DailyTotalResult dailyTotalResult) {
+	public void getStepsForToday(DailyTotalResult dailyTotalResult) {
 		int total;
 		if (dailyTotalResult.getStatus().isSuccess()) {
 			DataSet dataSet = dailyTotalResult.getTotal();
@@ -362,7 +299,32 @@ public class BuildFitnessClient {
 		}
 	}
 
-	private List<HistoryListItem> getSteps(DataReadResult dataReadResult) {
+	public void showSensorSteps(DataPoint dataPoint) {
+		for (Field field : dataPoint.getDataType().getFields()) {
+			final Value val = dataPoint.getValue(field);
+			mSensorSteps = val.asInt();
+			mHistorySteps += mSensorSteps;
+			mListener.showSensorStepsOnCircle(mHistorySteps);
+		}
+	}
+
+	public float getDailyDistance(DataReadResult dataReadResult) {
+		float distance = 0;
+
+		Bucket bucket = dataReadResult.getBuckets().get(0);
+		List<DataSet> dataSets = bucket.getDataSets();
+		for (DataSet dataSet : dataSets) {
+			for (DataPoint dataPoint : dataSet.getDataPoints()) {
+				for (Field field : dataPoint.getDataType().getFields()) {
+					distance = dataPoint.getValue(field).asFloat();
+					distance /= 1000;
+				}
+			}
+		}
+		return distance;
+	}
+
+	public List<HistoryListItem> getSteps(DataReadResult dataReadResult) {
 		int steps;
 		List<HistoryListItem> stepsList = new ArrayList<>();
 
@@ -381,7 +343,7 @@ public class BuildFitnessClient {
 		return stepsList;
 	}
 
-	private List<HistoryListItem> getDistance(DataReadResult dataReadResult) {
+	public List<HistoryListItem> getDistance(DataReadResult dataReadResult) {
 		float distance;
 		List<HistoryListItem> historyListItems = new ArrayList<>();
 
@@ -400,24 +362,7 @@ public class BuildFitnessClient {
 		return historyListItems;
 	}
 
-
-	private float getDailyDistance(DataReadResult dataReadResult) {
-		float distance = 0;
-
-		Bucket bucket = dataReadResult.getBuckets().get(0);
-		List<DataSet> dataSets = bucket.getDataSets();
-		for (DataSet dataSet : dataSets) {
-			for (DataPoint dataPoint : dataSet.getDataPoints()) {
-				for (Field field : dataPoint.getDataType().getFields()) {
-					distance = dataPoint.getValue(field).asFloat();
-					distance /= 1000;
-				}
-			}
-		}
-		return distance;
-	}
-
-	private float getDailyCalories(DataReadResult dataReadResult) {
+	public float getDailyCalories(DataReadResult dataReadResult) {
 		float calories = 0;
 
 		Bucket bucket = dataReadResult.getBuckets().get(0);
@@ -430,15 +375,6 @@ public class BuildFitnessClient {
 			}
 		}
 		return (int) calories;
-	}
-
-	private void showSensorSteps(DataPoint dataPoint) {
-		for (Field field : dataPoint.getDataType().getFields()) {
-			final Value val = dataPoint.getValue(field);
-			mSensorSteps = val.asInt();
-			mHistorySteps += mSensorSteps;
-			mListener.showSensorStepsOnCircle(mHistorySteps);
-		}
 	}
 
 	public void onStopCalled() {
@@ -460,48 +396,35 @@ public class BuildFitnessClient {
 		mClient.disconnect();
 	}
 
-	public void requestFitnessData(ClientDataType dataType, ClientRange range) {
-		switch (dataType) {
-			case CALORIES:
-				if (range == ClientRange.DAILY) {
-					caloriesCount();
-				} else if (range == ClientRange.WEEKLY) {
-					caloriesCountWeekly();
-				} else if (range == ClientRange.MONTHLY) {
-					caloriesCountMonthly();
-				}
-				break;
-			case DISTANCE:
-				if (range == ClientRange.DAILY) {
-					distanceCount();
-				} else if (range == ClientRange.WEEKLY) {
-					distanceCountWeekly();
-				} else if (range == ClientRange.MONTHLY) {
-					distanceCountMonthly();
-				}
-				break;
-			case STEPS:
-				if (range == ClientRange.DAILY) {
-					stepCount();
-					sensorStepCount();
-				} else if (range == ClientRange.WEEKLY) {
-					stepCountWeekly();
-				} else if (range == ClientRange.MONTHLY) {
-					stepCountMonthly();
-				}
-				break;
-		}
+	public void onLastWeekCaloriesUpdated(List<HistoryListItem> calories) {
+		mHistoryListener.onLastWeekCaloriesUpdated(calories);
 	}
 
-	public enum ClientDataType {
-		CALORIES,
-		DISTANCE,
-		STEPS
+	public void onLastWeekDistanceUpdated(List<HistoryListItem> distance) {
+		mHistoryListener.onLastWeekDistanceUpdated(distance);
 	}
 
-	public enum ClientRange {
-		DAILY,
-		WEEKLY,
-		MONTHLY
+	public void onLastWeekStepsUpdated(List<HistoryListItem> steps) {
+		mHistoryListener.onLastWeekStepsUpdated(steps);
+	}
+
+	public void onLastMonthCaloriesUpdated(List<HistoryListItem> calories) {
+		mHistoryListener.onLastMonthCaloriesUpdated(calories);
+	}
+
+	public void onLastMonthDistanceUpdated(List<HistoryListItem> distance) {
+		mHistoryListener.onLastMonthDistanceUpdated(distance);
+	}
+
+	public void onLastMonthStepsUpdated(List<HistoryListItem> steps) {
+		mHistoryListener.onLastMonthStepsUpdated(steps);
+	}
+
+	public void onTodayCaloriesUpdated(float dailyCalories) {
+		mListener.onTodayCalories(dailyCalories);
+	}
+
+	public void onTodayDistanceUpdated(float dailyDistance) {
+		mListener.onTodayDistanceUpdated(dailyDistance);
 	}
 }

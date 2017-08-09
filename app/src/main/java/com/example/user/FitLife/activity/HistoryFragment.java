@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.user.FitLife.BuildFitnessClient;
 import com.example.user.FitLife.HistoryAdapter;
 import com.example.user.FitLife.R;
 import com.example.user.FitLife.activity.clientprovider.BuildFitnessClientProvider;
@@ -68,17 +69,8 @@ public class HistoryFragment extends Fragment {
 
 		dataSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-				int selectItemIndex = adapterView.getSelectedItemPosition();
-
-				if (selectItemIndex == 0) {
-					//timeSpinner.getSelectedItemPosition();
-
-				} else if (selectItemIndex == 1) {
-
-				} else {
-
-				}
+			public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+				mHistoryPresenter.requestDataFor(position, timeSpinner.getSelectedItemPosition());
 			}
 
 			@Override
@@ -89,8 +81,8 @@ public class HistoryFragment extends Fragment {
 
 		timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+			public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+				mHistoryPresenter.requestDataFor(dataSpinner.getSelectedItemPosition(), position);
 			}
 
 			@Override
@@ -103,8 +95,14 @@ public class HistoryFragment extends Fragment {
 		return view;
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mHistoryPresenter.clientManagement();
+	}
+
 	public void displayLastMonthDistance(List<HistoryListItem> lastMonthDistance) {
-		 mHistoryAdapter.onNewData(lastMonthDistance);
+		mHistoryAdapter.onNewData(lastMonthDistance);
 	}
 
 	public void displayLastMonthCalories(List<HistoryListItem> lastMonthCalories) {

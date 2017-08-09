@@ -1,8 +1,6 @@
 package com.example.user.FitLife.presenter;
 
 import com.example.user.FitLife.BuildFitnessClient;
-import com.example.user.FitLife.ShowFitnessMonthlyInterface;
-import com.example.user.FitLife.ShowFitnessWeeklyDataInterface;
 import com.example.user.FitLife.activity.HistoryFragment;
 import com.example.user.FitLife.models.HistoryListItem;
 
@@ -12,7 +10,7 @@ import java.util.List;
  * Created by user on 26/07/2017.
  */
 
-public class HistoryPresenter implements ShowFitnessWeeklyDataInterface, ShowFitnessMonthlyInterface {
+public class HistoryPresenter implements HistoryListener {
 
 	private HistoryFragment mView;
 	private BuildFitnessClient mClient;
@@ -22,9 +20,18 @@ public class HistoryPresenter implements ShowFitnessWeeklyDataInterface, ShowFit
 		mClient = client;
 	}
 
-	public void requestHistoryData(BuildFitnessClient.ClientDataType dataType, BuildFitnessClient.ClientRange range) {
-		mClient.requestFitnessData(dataType, range);
 
+	public void onViewReady() {
+		mClient.initClient();
+		mClient.setHistoryListener(this);
+	}
+
+	public void requestDataFor(int type, int range){
+		mClient.requestDataFor(type, range);
+	}
+
+	public void clientManagement() {
+		mClient.manageClients();
 	}
 
 	@Override
@@ -55,11 +62,5 @@ public class HistoryPresenter implements ShowFitnessWeeklyDataInterface, ShowFit
 	@Override
 	public void onLastWeekStepsUpdated(List<HistoryListItem> totalLastWeekSteps) {
 		mView.displayLastWeekSteps(totalLastWeekSteps);
-	}
-
-	public void onViewReady() {
-		mClient.initClient();
-		mClient.setWeeklyListener(this);
-		mClient.setMonthlyListener(this);
 	}
 }

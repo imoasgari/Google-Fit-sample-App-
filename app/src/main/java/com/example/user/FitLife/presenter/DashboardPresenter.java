@@ -46,13 +46,6 @@ public class DashboardPresenter implements ShowFitnessDataInterface {
 		mView.displaySensorStepsOnCircle(sensorSteps);
 	}
 
-//	public void onStopHasCalled() {
-//		if (mClient != null) {
-//			mClient.onStopCalled();
-//			mClient.manageClients();
-//		}
-//	}
-
 	public void onViewReady() {
 		mClient.setListener(this);
 		mClient.initClient();

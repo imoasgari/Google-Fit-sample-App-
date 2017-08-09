@@ -1,4 +1,4 @@
-#Thu Aug 03 12:52:43 BST 2017
+#Tue Aug 08 17:42:00 BST 2017
 base.0=/Users/user/TestGoogleFit/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7
 renamed.0=classes.dex
 file.0=/Users/user/TestGoogleFit/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex

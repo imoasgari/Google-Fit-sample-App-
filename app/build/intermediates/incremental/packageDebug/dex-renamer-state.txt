@@ -1,4 +1,4 @@
-#Thu Aug 03 12:59:20 BST 2017
+#Tue Aug 08 12:23:49 BST 2017
 base.0=/Users/user/TestGoogleFit/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e60157d5d95d25449e4f3bd2654109f05a1d940e
 renamed.1=classes.dex
 renamed.0=classes2.dex
