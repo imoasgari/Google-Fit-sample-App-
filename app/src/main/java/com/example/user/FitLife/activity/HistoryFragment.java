@@ -13,8 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.example.user.FitLife.BuildFitnessClient;
-import com.example.user.FitLife.HistoryAdapter;
+import com.example.user.FitLife.adapter.HistoryAdapter;
 import com.example.user.FitLife.R;
 import com.example.user.FitLife.activity.clientprovider.BuildFitnessClientProvider;
 import com.example.user.FitLife.models.HistoryListItem;

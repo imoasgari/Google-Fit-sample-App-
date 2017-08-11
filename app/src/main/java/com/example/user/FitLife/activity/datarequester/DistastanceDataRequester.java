@@ -52,7 +52,7 @@ public class DistastanceDataRequester implements DataRequester {
 					DAYS_OF_WEEK, client.getStartWeek(), client.getEndWeek()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
-						client.onLastWeekDistanceUpdated(client.getDistance(dataReadResult));
+						client.onLastWeekDistanceUpdated(client.getDistance(dataReadResult, BuildFitnessClient.Range.WEEKLY));
 					}
 				});
 			}
@@ -64,7 +64,7 @@ public class DistastanceDataRequester implements DataRequester {
 					DAYS_OF_MONTH, client.getStartMonth(), client.getEndMonth()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
-						client.onLastMonthDistanceUpdated(client.getDistance(dataReadResult));
+						client.onLastMonthDistanceUpdated(client.getDistance(dataReadResult, BuildFitnessClient.Range.MONTHLY));
 					}
 				});
 			}

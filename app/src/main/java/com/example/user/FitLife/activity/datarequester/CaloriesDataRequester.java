@@ -55,7 +55,7 @@ public class CaloriesDataRequester implements DataRequester {
 					new ResultCallback<DataReadResult>() {
 						@Override
 						public void onResult(@NonNull DataReadResult dataReadResult) {
-							client.onLastWeekCaloriesUpdated(client.getCalories(dataReadResult));
+							client.onLastWeekCaloriesUpdated(client.getCalories(dataReadResult, BuildFitnessClient.Range.WEEKLY));
 						}
 					});
 			}
@@ -67,7 +67,7 @@ public class CaloriesDataRequester implements DataRequester {
 					DAYS_OF_MONTH, client.getStartMonth(), client.getEndMonth()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
-						client.onLastMonthCaloriesUpdated(client.getCalories(dataReadResult));
+						client.onLastMonthCaloriesUpdated(client.getCalories(dataReadResult, BuildFitnessClient.Range.MONTHLY));
 					}
 				});
 			}

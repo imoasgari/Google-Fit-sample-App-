@@ -264,7 +264,7 @@ public class BuildFitnessClient {
 		startMonth = calendar.getTimeInMillis();
 	}
 
-	public List<HistoryListItem> getCalories(DataReadResult dataReadResult) {
+	public List<HistoryListItem> getCalories(DataReadResult dataReadResult, Range range) {
 		float calories;
 		List<HistoryListItem> caloriesList = new ArrayList<>();
 
@@ -274,7 +274,7 @@ public class BuildFitnessClient {
 				for (DataPoint dataPoint : dataSet.getDataPoints()) {
 					for (Field field : dataPoint.getDataType().getFields()) {
 						calories = dataPoint.getValue(field).asFloat();
-						caloriesList.add(new HistoryListItem<>(calories, dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+						caloriesList.add(new HistoryListItem<>(calories, range.ordinal(), dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
 					}
 				}
 			}
@@ -282,8 +282,9 @@ public class BuildFitnessClient {
 		return caloriesList;
 	}
 
-	public void getStepsForToday(DailyTotalResult dailyTotalResult) {
+	public void getStepsForToday(DailyTotalResult dailyTotalResult, Range range) {
 		int total;
+		List<HistoryListItem> stepList = new ArrayList<>();
 		if (dailyTotalResult.getStatus().isSuccess()) {
 			DataSet dataSet = dailyTotalResult.getTotal();
 			if (dataSet != null) {
@@ -295,6 +296,7 @@ public class BuildFitnessClient {
 				mHistorySteps = total;
 				mListener.onTodayStepUpdated(mHistorySteps);
 				mListener.showSensorStepsOnCircle(mHistorySteps);
+				stepList.add(new HistoryListItem<>(total, range.ordinal(), getStartTime(), getEndTime()));
 			}
 		}
 	}
@@ -324,7 +326,7 @@ public class BuildFitnessClient {
 		return distance;
 	}
 
-	public List<HistoryListItem> getSteps(DataReadResult dataReadResult) {
+	public List<HistoryListItem> getSteps(DataReadResult dataReadResult, Range range) {
 		int steps;
 		List<HistoryListItem> stepsList = new ArrayList<>();
 
@@ -334,7 +336,7 @@ public class BuildFitnessClient {
 				for (DataPoint dataPoint : dataSet.getDataPoints()) {
 					for (Field field : dataPoint.getDataType().getFields()) {
 						steps = dataPoint.getValue(field).asInt();
-						stepsList.add(new HistoryListItem<>(steps, dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+						stepsList.add(new HistoryListItem<>(steps, range.ordinal(),dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
 
 					}
 				}
@@ -343,7 +345,7 @@ public class BuildFitnessClient {
 		return stepsList;
 	}
 
-	public List<HistoryListItem> getDistance(DataReadResult dataReadResult) {
+	public List<HistoryListItem> getDistance(DataReadResult dataReadResult, Range range) {
 		float distance;
 		List<HistoryListItem> historyListItems = new ArrayList<>();
 
@@ -354,7 +356,7 @@ public class BuildFitnessClient {
 					for (Field field : dataPoint.getDataType().getFields()) {
 						distance = dataPoint.getValue(field).asFloat();
 						distance /= 1000;
-						historyListItems.add(new HistoryListItem<>(distance, dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+						historyListItems.add(new HistoryListItem<>(distance, range.ordinal(),dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
 					}
 				}
 			}
@@ -375,6 +377,19 @@ public class BuildFitnessClient {
 			}
 		}
 		return (int) calories;
+	}
+
+	public enum Range {
+
+		DAILY(0),
+		WEEKLY(1),
+		MONTHLY(2);
+
+		private int mInt;
+
+		Range(int anInt) {
+			mInt = anInt;
+		}
 	}
 
 	public void onStopCalled() {

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/item_history.xml",
+        "source": "/Users/user/TestGoogleFit/app/src/main/res/layout/item_history.xml"
+    },
+    {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/layout/abc_activity_chooser_view_list_item.xml"
     },
@@ -222,9 +226,5 @@
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/layout/abc_action_menu_layout.xml"
-    },
-    {
-        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/layout/items_history.xml",
-        "source": "/Users/user/TestGoogleFit/app/src/main/res/layout/items_history.xml"
     }
 ]
