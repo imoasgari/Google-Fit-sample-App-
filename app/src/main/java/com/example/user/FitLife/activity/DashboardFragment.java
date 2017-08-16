@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.FitLife.BuildFitnessClient;
 import com.example.user.FitLife.PermissionManager;
 import com.example.user.FitLife.R;
 import com.example.user.FitLife.ShowSensorData;
@@ -95,7 +96,6 @@ public class DashboardFragment extends Fragment implements ShowSensorData {
 	}
 
 
-
 	private void createBackSeries() {
 		SeriesItem seriesItem = createSeriesItem("#FFE2E2E2", mSeriesMax, true);
 		mBackIndex = decoView.addSeries(seriesItem);
@@ -163,19 +163,26 @@ public class DashboardFragment extends Fragment implements ShowSensorData {
 	}
 
 	public void displayTodaySteps(int finalSteps) {
-		mTodaySteps.setText(finalSteps + "");
-		decoView.addEvent(new DecoEvent.Builder(finalSteps)
-			.setIndex(mSeriesIndex)
-			.setDelay(1250)
-			.build());
+		if (finalSteps == 0) {
+			mTodaySteps.setText("0.0");
+		} else {
+			mTodaySteps.setText(finalSteps + "");
+			decoView.addEvent(new DecoEvent.Builder(finalSteps)
+				.setIndex(mSeriesIndex)
+				.setDelay(1250)
+				.build());
+		}
 	}
 
 	public void displayTodayTotalDistance(float todayDistance) {
-		mDistance.setText(todayDistance + "");
-		distanceDecoView.addEvent(new DecoEvent.Builder(todayDistance)
-			.setIndex(distanceSeriesIndex)
-			.setDelay(1250)
-			.build());
+		mDistance.setText("0.0");
+		if (todayDistance != 0) {
+			mDistance.setText(todayDistance + "");
+			distanceDecoView.addEvent(new DecoEvent.Builder(todayDistance)
+				.setIndex(distanceSeriesIndex)
+				.setDelay(1250)
+				.build());
+		}
 	}
 
 	public void displayTodayCalories(float todayCalories) {

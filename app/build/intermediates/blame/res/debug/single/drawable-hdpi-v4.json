@@ -28,32 +28,32 @@
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png"
     },
     {
-        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/common_google_signin_btn_text_dark_pressed.9.png",
-        "source": "/Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_pressed.9.png"
-    },
-    {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png",
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal.9.png",
-        "source": "/Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/res/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal.9.png"
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/common_google_signin_btn_text_dark_pressed.9.png",
+        "source": "/Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_pressed.9.png"
     },
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/common_google_signin_btn_text_light_disabled.9.png",
         "source": "/Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/res/drawable-hdpi-v4/common_google_signin_btn_text_light_disabled.9.png"
     },
     {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal.9.png",
+        "source": "/Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/res/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal.9.png"
+    },
+    {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png",
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
-        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png",
-        "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/common_google_signin_btn_icon_light_pressed.9.png",
         "source": "/Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/res/drawable-hdpi-v4/common_google_signin_btn_icon_light_pressed.9.png"
+    },
+    {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png",
+        "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png",

@@ -3,6 +3,7 @@ package com.example.user.FitLife.activity.datarequester;
 import android.support.annotation.NonNull;
 
 import com.example.user.FitLife.BuildFitnessClient;
+import com.example.user.FitLife.Utils;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.result.DataReadResult;
@@ -21,7 +22,6 @@ public class CaloriesDataRequester implements DataRequester {
 	private static int DAYS_OF_MONTH = 30;
 	private static int DAY = 1;
 
-
 	@Override
 	public DataRequester setClient(BuildFitnessClient client) {
 		mClient = client;
@@ -34,12 +34,12 @@ public class CaloriesDataRequester implements DataRequester {
 
 	}
 
-	private enum Range {
+	public enum Range {
 		DAILY(0, new RangeDataRequester() {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED,
-					DAY, client.getStartTime(), client.getEndTime()), new ResultCallback<DataReadResult>() {
+					DAY, Utils.getStartTime(), Utils.getEndTime()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onTodayCaloriesUpdated(client.getDailyCalories(dataReadResult));
@@ -51,7 +51,7 @@ public class CaloriesDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED,
-					DAYS_OF_WEEK, client.getStartWeek(), client.getEndWeek()),
+					DAYS_OF_WEEK, Utils.getStartWeek(), Utils.getEndWeek()),
 					new ResultCallback<DataReadResult>() {
 						@Override
 						public void onResult(@NonNull DataReadResult dataReadResult) {
@@ -64,7 +64,7 @@ public class CaloriesDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED,
-					DAYS_OF_MONTH, client.getStartMonth(), client.getEndMonth()), new ResultCallback<DataReadResult>() {
+					DAYS_OF_MONTH, Utils.getStartMonth(), Utils.getEndMonth()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onLastMonthCaloriesUpdated(client.getCalories(dataReadResult, BuildFitnessClient.Range.MONTHLY));
@@ -98,6 +98,10 @@ public class CaloriesDataRequester implements DataRequester {
 		private interface RangeDataRequester {
 
 			void requestDataWithRange(BuildFitnessClient client);
+		}
+
+		public int getIndex() {
+			return mResourceId;
 		}
 	}
 }

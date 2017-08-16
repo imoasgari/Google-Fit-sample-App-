@@ -1,9 +1,11 @@
 package com.example.user.FitLife.presenter;
 
 import com.example.user.FitLife.BuildFitnessClient;
+import com.example.user.FitLife.ShowFitnessDataInterface;
 import com.example.user.FitLife.activity.HistoryFragment;
 import com.example.user.FitLife.models.HistoryListItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,4 +65,15 @@ public class HistoryPresenter implements HistoryListener {
 	public void onLastWeekStepsUpdated(List<HistoryListItem> totalLastWeekSteps) {
 		mView.displayLastWeekSteps(totalLastWeekSteps);
 	}
+
+
+//	public List<HistoryListItem> getDataGroupedByWeek(List<HistoryListItem> dataGroupedByDays) {
+//		List<HistoryListItem> dataGroupedByWeek = new ArrayList<>();
+//		int i = 0;
+//		for(HistoryListItem dayItem : dataGroupedByDays) {
+//			dataGroupedByWeek.add(new HistoryListItem());
+//
+//		}
+//
+//	}
 }

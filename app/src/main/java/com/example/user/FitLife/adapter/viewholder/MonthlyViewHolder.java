@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.user.FitLife.R;
+import com.example.user.FitLife.adapter.HistoryAdapter;
 import com.example.user.FitLife.models.HistoryListItem;
 
 /**
@@ -31,6 +32,7 @@ public class MonthlyViewHolder extends BaseViewHolder {
 	public void onBind(HistoryListItem data) {
 		if (data.getType() == HistoryListItem.Type.MONTHLY) {
 			mStats.setText(data.getValue().toString());
+			mDate.setText(HistoryAdapter.Utils.getMonthDate(data.getEndDate()));
 		}
 	}
 }

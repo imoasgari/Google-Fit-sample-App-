@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.example.user.FitLife.activity.datarequester.CaloriesDataRequester;
 import com.example.user.FitLife.activity.datarequester.DataRequester;
-import com.example.user.FitLife.activity.datarequester.DistastanceDataRequester;
+import com.example.user.FitLife.activity.datarequester.DistanceDataRequester;
 import com.example.user.FitLife.activity.datarequester.StepsDataRequester;
 import com.example.user.FitLife.models.HistoryListItem;
 import com.example.user.FitLife.presenter.HistoryListener;
@@ -56,19 +56,15 @@ public class BuildFitnessClient {
 	private ShowFitnessDataInterface mListener;
 	private OnDataPointListener dListener;
 	private HistoryListener mHistoryListener;
-	private long startTime;
-	private long endTime;
 	private int mHistorySteps;
 	private int mSensorSteps;
-	private long endWeek;
-	private long startWeek;
-	private long endMonth;
-	private long startMonth;
+	private Utils mUtils = new Utils();
+
 
 	public BuildFitnessClient(FragmentActivity context) {
 		mContext = context;
 		mDataRequesterMap.put(0, new CaloriesDataRequester().setClient(this));
-		mDataRequesterMap.put(1, new DistastanceDataRequester().setClient(this));
+		mDataRequesterMap.put(1, new DistanceDataRequester().setClient(this));
 		mDataRequesterMap.put(2, new StepsDataRequester().setClient(this));
 
 	}
@@ -85,31 +81,8 @@ public class BuildFitnessClient {
 		return mHistoryListener;
 	}
 
-	public long getEndWeek() {
-		return endWeek;
-	}
-
-	public long getStartWeek() {
-		return startWeek;
-	}
-
-	public long getEndMonth() {
-		return endMonth;
-	}
-
-	public long getStartMonth() {
-		return startMonth;
-	}
-
-	public long getStartTime() {
-		return startTime;
-	}
-
-	public long getEndTime() {
-		return endTime;
-	}
-
 	public void initClient() {
+		mUtils.initTimes();
 		//check if the client is null || is disconnected
 		if (mClient == null || !mClient.isConnected()) {
 
@@ -126,8 +99,7 @@ public class BuildFitnessClient {
 
 						@Override
 						public void onConnected(Bundle bundle) {
-							initTime();
-							initDailyFitnessData();
+							sensorStepCount();
 						}
 
 						@Override
@@ -153,19 +125,6 @@ public class BuildFitnessClient {
 
 	}
 
-	private void initTime() {
-		setWeekTime();
-		setMonthTime();
-		setDayTime();
-	}
-
-	private void initDailyFitnessData() {
-		//stepCount();
-		//caloriesCount();
-		//distanceCount();
-		sensorStepCount();
-	}
-
 	public void sensorStepCount() {
 		Fitness.SensorsApi.findDataSources(mClient, new DataSourcesRequest.Builder()
 			.setDataTypes(DataType.TYPE_STEP_COUNT_DELTA)
@@ -181,15 +140,6 @@ public class BuildFitnessClient {
 				}
 			});
 	}
-
-//	public void stepCount() {
-//		Fitness.HistoryApi.readDailyTotal(mClient, DataType.TYPE_STEP_COUNT_DELTA).setResultCallback(new ResultCallback<DailyTotalResult>() {
-//			@Override
-//			public void onResult(@NonNull DailyTotalResult dailyTotalResult) {
-//				getStepsForToday(dailyTotalResult);
-//			}
-//		});
-//	}
 
 	public void requestDataForSteps(DataType dataType, ResultCallback<DailyTotalResult> callback) {
 		Fitness.HistoryApi.readDailyTotal(mClient, dataType).setResultCallback(callback);
@@ -235,35 +185,6 @@ public class BuildFitnessClient {
 			.build();
 	}
 
-	private void setDayTime() {
-		Calendar cal = Calendar.getInstance();
-		Date now = new Date();
-		cal.setTime(now);
-		endTime = cal.getTimeInMillis();
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		startTime = cal.getTimeInMillis();
-	}
-
-	private void setWeekTime() {
-		Calendar calendar = Calendar.getInstance();
-		Date now = new Date();
-		calendar.setTime(now);
-		endWeek = calendar.getTimeInMillis();
-		calendar.add(Calendar.WEEK_OF_YEAR, -1);
-		startWeek = calendar.getTimeInMillis();
-	}
-
-	private void setMonthTime() {
-		Calendar calendar = Calendar.getInstance();
-		Date now = new Date();
-		calendar.setTime(now);
-		endMonth = calendar.getTimeInMillis();
-		calendar.add(Calendar.MONTH, -1);
-		startMonth = calendar.getTimeInMillis();
-	}
-
 	public List<HistoryListItem> getCalories(DataReadResult dataReadResult, Range range) {
 		float calories;
 		List<HistoryListItem> caloriesList = new ArrayList<>();
@@ -296,7 +217,7 @@ public class BuildFitnessClient {
 				mHistorySteps = total;
 				mListener.onTodayStepUpdated(mHistorySteps);
 				mListener.showSensorStepsOnCircle(mHistorySteps);
-				stepList.add(new HistoryListItem<>(total, range.ordinal(), getStartTime(), getEndTime()));
+				stepList.add(new HistoryListItem<>(total, range.ordinal(), Utils.getStartTime(), Utils.getEndTime()));
 			}
 		}
 	}
@@ -336,7 +257,7 @@ public class BuildFitnessClient {
 				for (DataPoint dataPoint : dataSet.getDataPoints()) {
 					for (Field field : dataPoint.getDataType().getFields()) {
 						steps = dataPoint.getValue(field).asInt();
-						stepsList.add(new HistoryListItem<>(steps, range.ordinal(),dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+						stepsList.add(new HistoryListItem<>(steps, range.ordinal(), dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
 
 					}
 				}
@@ -352,17 +273,20 @@ public class BuildFitnessClient {
 		for (Bucket bucket : dataReadResult.getBuckets()) {
 			List<DataSet> dataSets = bucket.getDataSets();
 			for (DataSet dataSet : dataSets) {
-				for (DataPoint dataPoint : dataSet.getDataPoints()) {
-					for (Field field : dataPoint.getDataType().getFields()) {
-						distance = dataPoint.getValue(field).asFloat();
-						distance /= 1000;
-						historyListItems.add(new HistoryListItem<>(distance, range.ordinal(),dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+				if (dataSets.size() != 0) {
+					for (DataPoint dataPoint : dataSet.getDataPoints()) {
+						for (Field field : dataPoint.getDataType().getFields()) {
+							distance = dataPoint.getValue(field).asFloat();
+							distance /= 1000;
+							historyListItems.add(new HistoryListItem<>(distance, range.ordinal(), dataPoint.getStartTime(TimeUnit.MILLISECONDS), dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+						}
 					}
 				}
 			}
 		}
 		return historyListItems;
 	}
+
 
 	public float getDailyCalories(DataReadResult dataReadResult) {
 		float calories = 0;
@@ -379,8 +303,8 @@ public class BuildFitnessClient {
 		return (int) calories;
 	}
 
-	public enum Range {
 
+	public enum Range {
 		DAILY(0),
 		WEEKLY(1),
 		MONTHLY(2);
@@ -389,6 +313,10 @@ public class BuildFitnessClient {
 
 		Range(int anInt) {
 			mInt = anInt;
+		}
+
+		public int getIndex() {
+			return mInt;
 		}
 	}
 
@@ -442,4 +370,5 @@ public class BuildFitnessClient {
 	public void onTodayDistanceUpdated(float dailyDistance) {
 		mListener.onTodayDistanceUpdated(dailyDistance);
 	}
+
 }

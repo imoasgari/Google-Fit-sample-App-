@@ -3,6 +3,7 @@ package com.example.user.FitLife.activity.datarequester;
 import android.support.annotation.NonNull;
 
 import com.example.user.FitLife.BuildFitnessClient;
+import com.example.user.FitLife.Utils;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.result.DataReadResult;
@@ -14,10 +15,10 @@ import java.util.Map;
  * Created by user on 09/08/2017.
  */
 
-public class DistastanceDataRequester implements DataRequester {
+public class DistanceDataRequester implements DataRequester {
 
 	private BuildFitnessClient mClient;
-	private static int DAYS_OF_WEEK = 7;
+	private static int DAYS_OF_WEEK = 6;
 	private static int DAYS_OF_MONTH = 30;
 	private static int DAY = 1;
 
@@ -32,12 +33,12 @@ public class DistastanceDataRequester implements DataRequester {
 		Range.get(range).requestDataFor(mClient);
 	}
 
-	private enum Range {
+	public enum Range {
 		DAILY(0, new RangeDataRequester() {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_DISTANCE_DELTA, DataType.AGGREGATE_DISTANCE_DELTA,
-					DAY, client.getStartTime(), client.getEndTime()), new ResultCallback<DataReadResult>() {
+					DAY, Utils.getStartTime(), Utils.getEndTime()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onTodayDistanceUpdated(client.getDailyDistance(dataReadResult));
@@ -49,7 +50,7 @@ public class DistastanceDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_DISTANCE_DELTA, DataType.AGGREGATE_DISTANCE_DELTA,
-					DAYS_OF_WEEK, client.getStartWeek(), client.getEndWeek()), new ResultCallback<DataReadResult>() {
+					DAYS_OF_WEEK, Utils.getStartWeek(), Utils.getEndWeek()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onLastWeekDistanceUpdated(client.getDistance(dataReadResult, BuildFitnessClient.Range.WEEKLY));
@@ -61,7 +62,7 @@ public class DistastanceDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_DISTANCE_DELTA, DataType.AGGREGATE_DISTANCE_DELTA,
-					DAYS_OF_MONTH, client.getStartMonth(), client.getEndMonth()), new ResultCallback<DataReadResult>() {
+					1, Utils.getStartMonth(), Utils.getEndMonth()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onLastMonthDistanceUpdated(client.getDistance(dataReadResult, BuildFitnessClient.Range.MONTHLY));
@@ -96,6 +97,10 @@ public class DistastanceDataRequester implements DataRequester {
 		private interface RangeDataRequester {
 
 			void requestDataWithRange(BuildFitnessClient client);
+		}
+
+		public int getIndex() {
+			return mResourceId;
 		}
 	}
 }

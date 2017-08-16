@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.user.FitLife.R;
+import com.example.user.FitLife.adapter.HistoryAdapter;
 import com.example.user.FitLife.models.HistoryListItem;
 
 /**
@@ -14,6 +15,7 @@ public class WeeklyViewHolder extends BaseViewHolder {
 	public static final int LAYOUT = R.layout.item_history;
 	private TextView mDate;
 	private TextView mStats;
+	private HistoryListItem mHistoryListItems;
 
 	public WeeklyViewHolder(View itemView) {
 		super(itemView);
@@ -30,6 +32,7 @@ public class WeeklyViewHolder extends BaseViewHolder {
 	public void onBind(HistoryListItem data) {
 		if (data.getType() == HistoryListItem.Type.WEEKLY) {
 			mStats.setText(data.getValue().toString());
+			mDate.setText(HistoryAdapter.Utils.getDateFormatForWeek(data.getStartDate(), data.getEndDate()));
 		}
 	}
 }

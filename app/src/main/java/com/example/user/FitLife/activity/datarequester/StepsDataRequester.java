@@ -3,6 +3,7 @@ package com.example.user.FitLife.activity.datarequester;
 import android.support.annotation.NonNull;
 
 import com.example.user.FitLife.BuildFitnessClient;
+import com.example.user.FitLife.Utils;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.result.DailyTotalResult;
@@ -34,7 +35,7 @@ public class StepsDataRequester implements DataRequester {
 		Range.get(range).requestDataFor(mClient);
 	}
 
-	private enum Range {
+	public enum Range {
 		DAILY(0, new RangeDataRequester() {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
@@ -50,7 +51,7 @@ public class StepsDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA,
-					DAYS_OF_WEEK, client.getStartWeek(), client.getEndWeek()), new ResultCallback<DataReadResult>() {
+					DAYS_OF_WEEK, Utils.getStartWeek(), Utils.getEndWeek()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onLastWeekStepsUpdated(client.getSteps(dataReadResult, BuildFitnessClient.Range.WEEKLY));
@@ -62,7 +63,7 @@ public class StepsDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA,
-					DAYS_OF_MONTH, client.getStartMonth(), client.getEndMonth()), new ResultCallback<DataReadResult>() {
+					DAYS_OF_MONTH, Utils.getStartMonth(), Utils.getEndMonth()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onLastMonthStepsUpdated(client.getSteps(dataReadResult, BuildFitnessClient.Range.MONTHLY));
@@ -94,6 +95,10 @@ public class StepsDataRequester implements DataRequester {
 
 		private interface RangeDataRequester {
 			void requestDataWithRange(BuildFitnessClient client);
+		}
+
+		public int getIndex(){
+			return mResourceId;
 		}
 	}
 }

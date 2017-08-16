@@ -5,6 +5,8 @@ import android.view.View;
 
 import com.example.user.FitLife.models.HistoryListItem;
 
+import java.text.ParseException;
+
 /**
  * Created by user on 10/08/2017.
  */

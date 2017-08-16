@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Aug 11 17:03:28 BST 2017
+#Mon Aug 14 16:36:33 BST 2017
 210.set=ANDROID_RESOURCE
 14.set=ANDROID_RESOURCE
 180.file=/Users/user/TestGoogleFit/app/build/intermediates/res/resources-debug.ap_/res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png

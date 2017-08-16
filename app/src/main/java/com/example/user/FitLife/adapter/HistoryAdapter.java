@@ -5,16 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.user.FitLife.R;
 import com.example.user.FitLife.adapter.viewholder.BaseViewHolder;
 import com.example.user.FitLife.adapter.viewholder.DailyViewHolder;
 import com.example.user.FitLife.adapter.viewholder.MonthlyViewHolder;
 import com.example.user.FitLife.adapter.viewholder.WeeklyViewHolder;
 import com.example.user.FitLife.models.HistoryListItem;
-
-import org.joda.time.DateTime;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,7 +22,6 @@ import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-	public static String DATE_FORMAT = "LLLL";
 	private Context mContext;
 	private List<HistoryListItem> mHistoryListItem;
 
@@ -44,7 +39,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 				return new DailyViewHolder(contactView);
 			case WEEKLY:
 				View contactWeekView = inflater.inflate(WeeklyViewHolder.LAYOUT, parent, false);
-				return new DailyViewHolder(contactWeekView);
+				return new WeeklyViewHolder(contactWeekView);
 			case MONTHLY:
 				View contactMonthView = inflater.inflate(MonthlyViewHolder.LAYOUT, parent, false);
 				return new MonthlyViewHolder(contactMonthView);
@@ -73,12 +68,17 @@ public class HistoryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 		notifyDataSetChanged();
 	}
 
-	public static class Utils {
-		private static HistoryListItem S_ITEM;
 
-		public static String getMonthDate(long milliSeconds, String dateFormat) {
+
+	public static class Utils {
+		private static String DATE_FORMAT_FOR_MONTH = "LLLL";
+		private static String DATE_FORMAT_FOR_WEEK = "MMMM d";
+		private static String DATE_FORMAT_FOR_DAY = "d";
+
+
+		public static String getMonthDate(long milliSeconds) {
 			// Create a DateFormatter object for displaying date in specified format.
-			SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+			SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_FOR_MONTH);
 
 			// Create a calendar object that will convert the date and time value in milliseconds to date.
 			Calendar calendar = Calendar.getInstance();
@@ -87,18 +87,34 @@ public class HistoryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
 		}
 
-//		public static String[] getMonthDate(Long historyListItem) {
-//			DateTime dateTime = new DateTime();
-//			String[] month = new String[]{};
-//			historyListItem = S_ITEM.getEndDate();
-//
-//			for (int i = 0; i < historyListItem; i++) {
-//				month[i] = String.valueOf(i);
-//			}
-//
-//
-//			return dateTime(month);
-//		}
+		public static String getDateFormatForDay(long milliSeconds) {
+			// Create a DateFormatter object for displaying date in specified format.
+			SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_FOR_DAY);
+
+			// Create a calendar object that will convert the date and time value in milliseconds to date.
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTimeInMillis(milliSeconds);
+			return formatter.format(calendar.getTime());
+		}
+
+		public static String getDateFormatForWeek(long startDate, long endDate) {
+			String startOfTheWeek;
+			String endOfTheWeek;
+
+			SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_FOR_WEEK);
+
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTimeInMillis(startDate);
+			startOfTheWeek = formatter.format(calendar.getTime());
+
+			Calendar cal = Calendar.getInstance();
+			calendar.setTimeInMillis(endDate);
+			endOfTheWeek = formatter.format(cal.getTime());
+
+
+
+			return startOfTheWeek + " - " + endOfTheWeek;
+		}
 
 	}
 }

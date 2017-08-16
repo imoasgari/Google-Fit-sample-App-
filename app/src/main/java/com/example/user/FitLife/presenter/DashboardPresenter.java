@@ -3,6 +3,9 @@ package com.example.user.FitLife.presenter;
 import com.example.user.FitLife.BuildFitnessClient;
 import com.example.user.FitLife.ShowFitnessDataInterface;
 import com.example.user.FitLife.activity.DashboardFragment;
+import com.example.user.FitLife.activity.datarequester.CaloriesDataRequester;
+import com.example.user.FitLife.activity.datarequester.DistanceDataRequester;
+import com.example.user.FitLife.activity.datarequester.StepsDataRequester;
 
 
 /**
@@ -49,6 +52,10 @@ public class DashboardPresenter implements ShowFitnessDataInterface {
 	public void onViewReady() {
 		mClient.setListener(this);
 		mClient.initClient();
+		mClient.requestDataFor(0, CaloriesDataRequester.Range.DAILY.getIndex());
+		mClient.requestDataFor(1, DistanceDataRequester.Range.DAILY.getIndex());
+		mClient.requestDataFor(2, StepsDataRequester.Range.DAILY.getIndex());
+
 	}
 
 }

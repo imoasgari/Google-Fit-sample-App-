@@ -7,6 +7,8 @@ import com.example.user.FitLife.R;
 import com.example.user.FitLife.adapter.HistoryAdapter;
 import com.example.user.FitLife.models.HistoryListItem;
 
+import java.text.ParseException;
+
 /**
  * Created by user on 11/08/2017.
  */
@@ -29,11 +31,11 @@ public class DailyViewHolder extends BaseViewHolder {
 	}
 
 	@Override
-	public void onBind(HistoryListItem data) {
+	public void onBind(HistoryListItem data){
 		if(data.getType() == HistoryListItem.Type.DAILY) {
 			mStats.setText(data.getValue().toString());
-			mDate.setText(HistoryAdapter.Utils.getMonthDate(mHistoryListItems.getEndDate(), HistoryAdapter.DATE_FORMAT));
+			mDate.setText(HistoryAdapter.Utils.getDateFormatForDay(data.getEndDate()));
 		}
 	}
-
 }
+

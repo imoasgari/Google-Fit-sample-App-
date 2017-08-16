@@ -37,7 +37,6 @@ public class HistoryListItem<T> {
 	}
 
 
-
 	public enum Type {
 		DAILY(0),
 		WEEKLY(1),
@@ -47,7 +46,7 @@ public class HistoryListItem<T> {
 
 		Type(int sourceId) {
 			mId = sourceId;
-			Map.sMap.put(mId,this);
+			Map.sMap.put(mId, this);
 		}
 
 		public static Type fromId(int type) {
