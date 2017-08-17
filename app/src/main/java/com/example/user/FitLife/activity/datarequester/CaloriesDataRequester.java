@@ -8,6 +8,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.result.DataReadResult;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +44,7 @@ public class CaloriesDataRequester implements DataRequester {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onTodayCaloriesUpdated(client.getDailyCalories(dataReadResult));
+						client.onTodayCaloriesForHistory(client.getCalories(dataReadResult, BuildFitnessClient.Range.DAILY));
 					}
 				});
 			}
@@ -51,7 +53,7 @@ public class CaloriesDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED,
-					DAYS_OF_WEEK, Utils.getStartWeek(), Utils.getEndWeek()),
+					7, Utils.getStartWeek(), Utils.getEndWeek()),
 					new ResultCallback<DataReadResult>() {
 						@Override
 						public void onResult(@NonNull DataReadResult dataReadResult) {
@@ -64,7 +66,7 @@ public class CaloriesDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED,
-					DAYS_OF_MONTH, Utils.getStartMonth(), Utils.getEndMonth()), new ResultCallback<DataReadResult>() {
+					Calendar.WEEK_OF_MONTH, Utils.getStartMonth(), Utils.getEndMonth()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onLastMonthCaloriesUpdated(client.getCalories(dataReadResult, BuildFitnessClient.Range.MONTHLY));

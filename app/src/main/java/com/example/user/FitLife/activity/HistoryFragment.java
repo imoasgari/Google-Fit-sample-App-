@@ -131,4 +131,15 @@ public class HistoryFragment extends Fragment {
 		return mData;
 	}
 
+	public void displayTodayCalories(List<HistoryListItem> calories) {
+		mHistoryAdapter.onNewData(calories);
+	}
+
+	public void displayTodayDistance(List<HistoryListItem> distance) {
+		mHistoryAdapter.onNewData(distance);
+	}
+
+	public void displayTodaySteps(List<HistoryListItem> steps) {
+		mHistoryAdapter.onNewData(steps);
+	}
 }

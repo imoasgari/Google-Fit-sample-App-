@@ -8,6 +8,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.result.DataReadResult;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +43,7 @@ public class DistanceDataRequester implements DataRequester {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onTodayDistanceUpdated(client.getDailyDistance(dataReadResult));
+						client.onTodayDistanceForHistory(client.getDistance(dataReadResult, BuildFitnessClient.Range.DAILY));
 					}
 				});
 			}
@@ -62,7 +64,7 @@ public class DistanceDataRequester implements DataRequester {
 			@Override
 			public void requestDataWithRange(final BuildFitnessClient client) {
 				client.requestHistoryData(client.buildQueryForFitnessData(DataType.TYPE_DISTANCE_DELTA, DataType.AGGREGATE_DISTANCE_DELTA,
-					1, Utils.getStartMonth(), Utils.getEndMonth()), new ResultCallback<DataReadResult>() {
+					DAYS_OF_MONTH, Utils.getStartMonth(), Utils.getEndMonth()), new ResultCallback<DataReadResult>() {
 					@Override
 					public void onResult(@NonNull DataReadResult dataReadResult) {
 						client.onLastMonthDistanceUpdated(client.getDistance(dataReadResult, BuildFitnessClient.Range.MONTHLY));

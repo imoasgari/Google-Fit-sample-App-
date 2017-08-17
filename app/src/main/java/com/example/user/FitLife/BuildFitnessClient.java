@@ -34,8 +34,6 @@ import com.google.android.gms.fitness.result.DataReadResult;
 import com.google.android.gms.fitness.result.DataSourcesResult;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +89,6 @@ public class BuildFitnessClient {
 			mClient = new GoogleApiClient.Builder(mContext)
 				.addApi(Fitness.HISTORY_API)
 				.addApi(Fitness.SENSORS_API)
-				.addApi(Fitness.RECORDING_API)
 				.addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
 				.addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
 				.addConnectionCallbacks(
@@ -122,7 +119,6 @@ public class BuildFitnessClient {
 		} else {
 			mClient.reconnect();
 		}
-
 	}
 
 	public void sensorStepCount() {
@@ -218,6 +214,7 @@ public class BuildFitnessClient {
 				mListener.onTodayStepUpdated(mHistorySteps);
 				mListener.showSensorStepsOnCircle(mHistorySteps);
 				stepList.add(new HistoryListItem<>(total, range.ordinal(), Utils.getStartTime(), Utils.getEndTime()));
+				mHistoryListener.onTodayStepsUpdatedForHistory(stepList);
 			}
 		}
 	}
@@ -233,7 +230,6 @@ public class BuildFitnessClient {
 
 	public float getDailyDistance(DataReadResult dataReadResult) {
 		float distance = 0;
-
 		Bucket bucket = dataReadResult.getBuckets().get(0);
 		List<DataSet> dataSets = bucket.getDataSets();
 		for (DataSet dataSet : dataSets) {
@@ -250,7 +246,6 @@ public class BuildFitnessClient {
 	public List<HistoryListItem> getSteps(DataReadResult dataReadResult, Range range) {
 		int steps;
 		List<HistoryListItem> stepsList = new ArrayList<>();
-
 		for (Bucket bucket : dataReadResult.getBuckets()) {
 			List<DataSet> dataSets = bucket.getDataSets();
 			for (DataSet dataSet : dataSets) {
@@ -269,7 +264,6 @@ public class BuildFitnessClient {
 	public List<HistoryListItem> getDistance(DataReadResult dataReadResult, Range range) {
 		float distance;
 		List<HistoryListItem> historyListItems = new ArrayList<>();
-
 		for (Bucket bucket : dataReadResult.getBuckets()) {
 			List<DataSet> dataSets = bucket.getDataSets();
 			for (DataSet dataSet : dataSets) {
@@ -290,7 +284,6 @@ public class BuildFitnessClient {
 
 	public float getDailyCalories(DataReadResult dataReadResult) {
 		float calories = 0;
-
 		Bucket bucket = dataReadResult.getBuckets().get(0);
 		List<DataSet> dataSets = bucket.getDataSets();
 		for (DataSet dataSet : dataSets) {
@@ -303,12 +296,10 @@ public class BuildFitnessClient {
 		return (int) calories;
 	}
 
-
 	public enum Range {
 		DAILY(0),
 		WEEKLY(1),
 		MONTHLY(2);
-
 		private int mInt;
 
 		Range(int anInt) {
@@ -369,6 +360,15 @@ public class BuildFitnessClient {
 
 	public void onTodayDistanceUpdated(float dailyDistance) {
 		mListener.onTodayDistanceUpdated(dailyDistance);
+	}
+
+	public void onTodayCaloriesForHistory(List<HistoryListItem> calories) {
+		mHistoryListener.onTodayCaloriesUpdatedForHistory(calories);
+	}
+
+
+	public void onTodayDistanceForHistory(List<HistoryListItem> distance) {
+		mHistoryListener.onTodayDistanceUpdatedForHistory(distance);
 	}
 
 }

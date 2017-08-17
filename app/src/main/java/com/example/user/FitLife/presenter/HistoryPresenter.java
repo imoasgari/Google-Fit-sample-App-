@@ -52,6 +52,21 @@ public class HistoryPresenter implements HistoryListener {
 	}
 
 	@Override
+	public void onTodayCaloriesUpdatedForHistory(List<HistoryListItem> calories) {
+		mView.displayTodayCalories(calories);
+	}
+
+	@Override
+	public void onTodayDistanceUpdatedForHistory(List<HistoryListItem> distance) {
+		mView.displayTodayDistance(distance);
+	}
+
+	@Override
+	public void onTodayStepsUpdatedForHistory(List<HistoryListItem> steps) {
+		mView.displayTodaySteps(steps);
+	}
+
+	@Override
 	public void onLastWeekDistanceUpdated(List<HistoryListItem> lastWeekDistance) {
 		mView.displayLastWeekDistance(lastWeekDistance);
 	}

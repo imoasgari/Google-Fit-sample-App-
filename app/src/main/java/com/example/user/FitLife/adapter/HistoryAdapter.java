@@ -69,12 +69,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 	}
 
 
-
 	public static class Utils {
 		private static String DATE_FORMAT_FOR_MONTH = "LLLL";
 		private static String DATE_FORMAT_FOR_WEEK = "MMMM d";
-		private static String DATE_FORMAT_FOR_DAY = "d";
-
+		private static String DATE_FORMAT_FOR_DAY = "EEEE";
 
 		public static String getMonthDate(long milliSeconds) {
 			// Create a DateFormatter object for displaying date in specified format.
@@ -84,22 +82,29 @@ public class HistoryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTimeInMillis(milliSeconds);
 			return formatter.format(calendar.getTime());
-
 		}
 
 		public static String getDateFormatForDay(long milliSeconds) {
+			String today = "Today";
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(milliSeconds);
 			// Create a DateFormatter object for displaying date in specified format.
 			SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_FOR_DAY);
 
 			// Create a calendar object that will convert the date and time value in milliseconds to date.
 			Calendar calendar = Calendar.getInstance();
-			calendar.setTimeInMillis(milliSeconds);
-			return formatter.format(calendar.getTime());
+			if (calendar.compareTo(cal) == 1) {
+				return today;
+			} else {
+				calendar.setTimeInMillis(milliSeconds);
+				return formatter.format(calendar.getTime());
+			}
+
+
 		}
 
 		public static String getDateFormatForWeek(long startDate, long endDate) {
 			String startOfTheWeek;
-			String endOfTheWeek;
 
 			SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_FOR_WEEK);
 
@@ -107,13 +112,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 			calendar.setTimeInMillis(startDate);
 			startOfTheWeek = formatter.format(calendar.getTime());
 
-			Calendar cal = Calendar.getInstance();
-			calendar.setTimeInMillis(endDate);
-			endOfTheWeek = formatter.format(cal.getTime());
-
-
-
-			return startOfTheWeek + " - " + endOfTheWeek;
+			return startOfTheWeek;
 		}
 
 	}

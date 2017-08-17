@@ -1,6 +1,5 @@
 package com.example.user.FitLife.presenter;
 
-import com.example.user.FitLife.ShowFitnessDataInterface;
 import com.example.user.FitLife.models.HistoryListItem;
 
 import java.util.List;
@@ -22,4 +21,10 @@ public interface HistoryListener {
 	void onLastMonthCaloriesUpdated(List<HistoryListItem> lastMonthCalories);
 
 	void onLastMonthStepsUpdated(List<HistoryListItem> totalStepsLastMonth);
+
+	void onTodayCaloriesUpdatedForHistory(List<HistoryListItem> calories);
+
+	void onTodayDistanceUpdatedForHistory(List<HistoryListItem> distance);
+
+	void onTodayStepsUpdatedForHistory(List<HistoryListItem> steps);
 }
