@@ -20,6 +20,10 @@
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/color/abc_primary_text_disable_only_material_light.xml"
     },
     {
+        "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_tint.xml",
+        "source": "/Users/user/.android/build-cache/f5b17b929890edef26b31c15d8b6993004639200/output/res/color/common_google_signin_btn_tint.xml"
+    },
+    {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
         "source": "/Users/user/.android/build-cache/46f8f9da6197e10cf7dbc9573e49cc47a124c4d9/output/res/color/abc_secondary_text_material_light.xml"
     },
@@ -41,7 +45,7 @@
     },
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",
-        "source": "/Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/res/color/common_google_signin_btn_text_dark.xml"
+        "source": "/Users/user/.android/build-cache/f5b17b929890edef26b31c15d8b6993004639200/output/res/color/common_google_signin_btn_text_dark.xml"
     },
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
@@ -53,6 +57,6 @@
     },
     {
         "merged": "/Users/user/TestGoogleFit/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_light.xml",
-        "source": "/Users/user/.android/build-cache/0b83c3def8b1bed08f55c06acb09eb6ebd7545ca/output/res/color/common_google_signin_btn_text_light.xml"
+        "source": "/Users/user/.android/build-cache/f5b17b929890edef26b31c15d8b6993004639200/output/res/color/common_google_signin_btn_text_light.xml"
     }
 ]

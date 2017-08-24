@@ -8,7 +8,7 @@ import com.example.user.FitLife.adapter.HistoryAdapter;
 import com.example.user.FitLife.models.HistoryListItem;
 
 /**
- * Created by user on 11/08/2017.
+ * Created by MohammadrezaAsgari on 11/08/2017.
  */
 
 public class MonthlyViewHolder extends BaseViewHolder {

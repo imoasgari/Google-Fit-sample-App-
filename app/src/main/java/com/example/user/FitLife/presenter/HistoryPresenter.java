@@ -1,5 +1,7 @@
 package com.example.user.FitLife.presenter;
 
+import android.util.Log;
+
 import com.example.user.FitLife.BuildFitnessClient;
 import com.example.user.FitLife.ShowFitnessDataInterface;
 import com.example.user.FitLife.activity.HistoryFragment;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by user on 26/07/2017.
+ * Created by MohammadrezaAsgari on 26/07/2017.
  */
 
 public class HistoryPresenter implements HistoryListener {
@@ -79,16 +81,19 @@ public class HistoryPresenter implements HistoryListener {
 	@Override
 	public void onLastWeekStepsUpdated(List<HistoryListItem> totalLastWeekSteps) {
 		mView.displayLastWeekSteps(totalLastWeekSteps);
+		getDataGroupedByWeek(totalLastWeekSteps);
 	}
 
+	private List<HistoryListItem> getDataGroupedByWeek(List<HistoryListItem> dataGroupedByDays) {
+		List<HistoryListItem> dataGroupedByWeek = new ArrayList<>();
+		int i = 0;
+		for(HistoryListItem weekItem : dataGroupedByDays) {
+			if(weekItem.getType() == HistoryListItem.Type.WEEKLY) {
+				dataGroupedByDays.get(i).getEndDate();
+				Log.i("Tag", dataGroupedByDays.get(i).getEndDate() + "");
+			}
 
-//	public List<HistoryListItem> getDataGroupedByWeek(List<HistoryListItem> dataGroupedByDays) {
-//		List<HistoryListItem> dataGroupedByWeek = new ArrayList<>();
-//		int i = 0;
-//		for(HistoryListItem dayItem : dataGroupedByDays) {
-//			dataGroupedByWeek.add(new HistoryListItem());
-//
-//		}
-//
-//	}
+		}
+		return dataGroupedByDays;
+	}
 }

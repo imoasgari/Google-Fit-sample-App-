@@ -8,14 +8,13 @@ import com.example.user.FitLife.adapter.HistoryAdapter;
 import com.example.user.FitLife.models.HistoryListItem;
 
 /**
- * Created by user on 11/08/2017.
+ * Created by MohammadrezaAsgari on 11/08/2017.
  */
 
 public class WeeklyViewHolder extends BaseViewHolder {
 	public static final int LAYOUT = R.layout.item_history;
 	private TextView mDate;
 	private TextView mStats;
-	private HistoryListItem mHistoryListItems;
 
 	public WeeklyViewHolder(View itemView) {
 		super(itemView);

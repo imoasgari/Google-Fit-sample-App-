@@ -3,7 +3,7 @@ package com.example.user.FitLife.presenter;
 import com.example.user.FitLife.activity.LandingActivity;
 
 /**
- * Created by user on 17/07/2017.
+ * Created by MohammadrezaAsgari on 17/07/2017.
  */
 
 public class LandingPresenter {

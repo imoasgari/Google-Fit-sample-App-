@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by user on 08/08/2017.
+ * Created by MohammadrezaAsgari on 08/08/2017.
  */
 
 public class CaloriesDataRequester implements DataRequester {

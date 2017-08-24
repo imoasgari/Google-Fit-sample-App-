@@ -15,7 +15,7 @@ import com.example.user.FitLife.activity.clientprovider.BuildFitnessClientProvid
 
 
 /**
- * Created by user on 18/07/2017.
+ * Created by MohammadrezaAsgari on 18/07/2017.
  */
 
 public class NavigationActivity extends AppCompatActivity implements BuildFitnessClientProvider {
@@ -52,7 +52,7 @@ public class NavigationActivity extends AppCompatActivity implements BuildFitnes
 							break;
 						case R.id.action_stats:
 							getSupportActionBar().setTitle(R.string.text_toolbar_stats);
-							//replaceFragment();
+							replaceFragment(new AnalyticsFragment());
 							break;
 						case R.id.action_setting:
 							getSupportActionBar().setTitle(R.string.text_toolbar_setting);

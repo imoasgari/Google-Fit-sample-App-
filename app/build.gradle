@@ -34,11 +34,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     // add Google fit
-    compile 'com.google.android.gms:play-services-fitness:9.8.0'
+    compile 'com.google.android.gms:play-services-fitness:11.0.1'
     compile 'com.android.support:design:26.+'
 
     compile 'com.github.bmarrdev:android-DecoView-charting:v0.9.3'
 
     compile 'joda-time:joda-time:2.9.4'
 
+    compile 'com.jjoe64:graphview:4.2.1'
 }

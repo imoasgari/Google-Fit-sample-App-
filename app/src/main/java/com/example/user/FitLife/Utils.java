@@ -1,14 +1,16 @@
 package com.example.user.FitLife;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by user on 15/08/2017.
+ * Created by MohammadrezaAsgari on 15/08/2017.
  */
 
 public class Utils {
 
+	private static final java.lang.String DATE_FORMAT_FOR_WEEK = "MMMM d";
 	private static long END_TIME;
 	private static long START_TIME;
 	private static long END_WEEK;
@@ -66,7 +68,6 @@ public class Utils {
 		START_WEEK = calendar.getTimeInMillis();
 	}
 
-	// for 2 months
 	public void setMonthTime() {
 		Calendar calendar = Calendar.getInstance();
 		Date now = new Date();
@@ -74,5 +75,17 @@ public class Utils {
 		END_MONTH = calendar.getTimeInMillis();
 		calendar.add(Calendar.MONTH, -12);
 		START_MONTH = calendar.getTimeInMillis();
+	}
+
+	public static String getDateFormatForWeek(double startDate) {
+		String startOfTheWeek;
+
+		SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_FOR_WEEK);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis((long) startDate);
+		startOfTheWeek = formatter.format(calendar.getTime());
+
+		return startOfTheWeek;
 	}
 }

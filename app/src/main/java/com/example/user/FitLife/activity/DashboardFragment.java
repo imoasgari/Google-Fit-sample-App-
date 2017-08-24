@@ -175,8 +175,9 @@ public class DashboardFragment extends Fragment implements ShowSensorData {
 	}
 
 	public void displayTodayTotalDistance(float todayDistance) {
-		mDistance.setText("0.0");
-		if (todayDistance != 0) {
+		if (todayDistance == 0) {
+			mDistance.setText("0.0");
+		} else {
 			mDistance.setText(todayDistance + "");
 			distanceDecoView.addEvent(new DecoEvent.Builder(todayDistance)
 				.setIndex(distanceSeriesIndex)

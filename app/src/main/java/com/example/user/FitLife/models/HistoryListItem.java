@@ -1,12 +1,14 @@
 package com.example.user.FitLife.models;
 
+import com.jjoe64.graphview.series.DataPointInterface;
+
 import java.util.HashMap;
 
 /**
- * Created by user on 02/08/2017.
+ * Created by MohammadrezaAsgari on 02/08/2017.
  */
 
-public class HistoryListItem<T> {
+public class HistoryListItem<T> implements DataPointInterface {
 
 	private long mStartDate;
 	private long mEndDate;
@@ -34,6 +36,16 @@ public class HistoryListItem<T> {
 
 	public T getValue() {
 		return mValue;
+	}
+
+	@Override
+	public double getX() {
+		return (double) mEndDate;
+	}
+
+	@Override
+	public double getY() {
+		return Double.parseDouble(mValue.toString());
 	}
 
 

@@ -10,14 +10,13 @@ import com.example.user.FitLife.models.HistoryListItem;
 import java.text.ParseException;
 
 /**
- * Created by user on 11/08/2017.
+ * Created by MohammadrezaAsgari on 11/08/2017.
  */
 
 public class DailyViewHolder extends BaseViewHolder {
 	public static int LAYOUT = R.layout.item_history;
 	private TextView mDate;
 	private TextView mStats;
-	private HistoryListItem mHistoryListItems;
 
 	public DailyViewHolder(View itemView) {
 		super(itemView);

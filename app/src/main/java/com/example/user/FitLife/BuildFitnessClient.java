@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by user on 07/07/2017.
+ * Created by MohammadrezaAsgari on 07/07/2017.
  */
 
 public class BuildFitnessClient {
@@ -326,8 +326,10 @@ public class BuildFitnessClient {
 	}
 
 	public void manageClients() {
-		mClient.stopAutoManage(mContext);
-		mClient.disconnect();
+		if (mClient != null) {
+			mClient.stopAutoManage(mContext);
+			mClient.disconnect();
+		}
 	}
 
 	public void onLastWeekCaloriesUpdated(List<HistoryListItem> calories) {

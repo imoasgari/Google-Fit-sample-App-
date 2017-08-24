@@ -6,7 +6,7 @@
     density="xxhdpi"
     format="10"
     plugin-version="2.3.3"
-    timestamp="1502981994448"
+    timestamp="1503575954542"
     token="-874856432765159664"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -25,11 +25,8 @@
 
     <build
         build-mode="FULL"
-        timestamp="1502963613523"
+        timestamp="1503575498059"
         verifier="FULL_BUILD_REQUESTED" >
-        <artifact
-            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
-            type="SPLIT" />
         <artifact
             location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
             type="SPLIT" />
@@ -37,16 +34,19 @@
             location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
+            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
             type="SPLIT" />
         <artifact
             location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
+            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
             type="SPLIT" />
         <artifact
             location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
             type="SPLIT" />
         <artifact
             location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
@@ -66,37 +66,15 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1502969333515"
+        timestamp="1503575920115"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
+            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
             type="SPLIT" />
     </build>
     <build
         build-mode="COLD"
-        timestamp="1502970213264"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
-            type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1502981237940"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/Users/user/TestGoogleFit/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
-            type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1502981994448"
+        timestamp="1503575954542"
         verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

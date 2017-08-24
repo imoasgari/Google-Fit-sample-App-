@@ -12,10 +12,10 @@ import java.util.List;
 
 
 /**
- * Created by user on 17/07/2017.
+ * Created by MohammadrezaAsgari on 17/07/2017.
  */
 
-public class DashboardPresenter implements ShowFitnessDataInterface , HistoryListener{
+public class DashboardPresenter implements ShowFitnessDataInterface, HistoryListener {
 
 	private DashboardFragment mView;
 	private BuildFitnessClient mClient;
@@ -53,13 +53,14 @@ public class DashboardPresenter implements ShowFitnessDataInterface , HistoryLis
 	}
 
 	public void onViewReady() {
-		mClient.setListener(this);
-		mClient.initClient();
-		mClient.setHistoryListener(this);
-		mClient.requestDataFor(0, CaloriesDataRequester.Range.DAILY.getIndex());
-		mClient.requestDataFor(1, DistanceDataRequester.Range.DAILY.getIndex());
-		mClient.requestDataFor(2, StepsDataRequester.Range.DAILY.getIndex());
-
+		if (mClient != null) {
+			mClient.initClient();
+			mClient.setListener(this);
+			mClient.setHistoryListener(this);
+			mClient.requestDataFor(0, CaloriesDataRequester.Range.DAILY.getIndex());
+			mClient.requestDataFor(1, DistanceDataRequester.Range.DAILY.getIndex());
+			mClient.requestDataFor(2, StepsDataRequester.Range.DAILY.getIndex());
+		}
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import com.example.user.FitLife.models.HistoryListItem;
 import java.text.ParseException;
 
 /**
- * Created by user on 10/08/2017.
+ * Created by MohammadrezaAsgari on 10/08/2017.
  */
 
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {

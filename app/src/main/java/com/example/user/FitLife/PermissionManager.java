@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 
 /**
- * Created by user on 13/07/2017.
+ * Created by MohammadrezaAsgari on 13/07/2017.
  */
 
 public class PermissionManager {

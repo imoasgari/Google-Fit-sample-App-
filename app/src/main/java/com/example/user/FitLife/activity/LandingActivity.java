@@ -18,7 +18,7 @@ import com.example.user.FitLife.presenter.LandingPresenter;
 import static com.example.user.FitLife.PermissionManager.MY_PERMISSION_FINE_LOCATION;
 
 /**
- * Created by user on 14/07/2017.
+ * Created by MohammadrezaAsgari on 14/07/2017.
  */
 
 public class LandingActivity extends FragmentActivity {
