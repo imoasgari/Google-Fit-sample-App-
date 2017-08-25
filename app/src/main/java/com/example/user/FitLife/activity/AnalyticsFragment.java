@@ -104,7 +104,7 @@ public class AnalyticsFragment extends Fragment {
 				if (isValueX) {
 					return super.formatLabel(value, isValueX);
 				} else {
-					for (int i =0; i< values.length; i++) {
+					for (int i = 0; i < values.length; i++) {
 						return Utils.getDateFormatForWeek(value);
 					}
 				}
@@ -132,7 +132,7 @@ public class AnalyticsFragment extends Fragment {
 				if (isValueX) {
 					return super.formatLabel(value, isValueX);
 				} else {
-					for (int i =0; i< values.length; i++) {
+					for (int i = 0; i < values.length; i++) {
 						return Utils.getDateFormatForWeek(value);
 					}
 				}
